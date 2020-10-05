@@ -62,10 +62,12 @@ const CourseSchema = new mongoose.Schema({
         type: Date,
     },
     primaryCategory: {
-        type: [mongoose.Schema.Types.ObjectId], ref: "Category"
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Category"
     },
     subCategory: {
-        type: [mongoose.Schema.Types.ObjectId], ref: "Subcategory"
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Subcategory"
     },
     language: {
         type: String,
@@ -76,8 +78,7 @@ const CourseSchema = new mongoose.Schema({
         type: String,
         enum: ["active", "archive", "deleted", "isPrivate", "notActive"],
         default: "notActive"
-    },
-    article: [{}]
+    }
 }, {timestamps: true})
 
-const Course = module.exports = mongoose.model("Course", CourseSchema);
+module.exports = mongoose.model("Course", CourseSchema);

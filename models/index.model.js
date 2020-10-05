@@ -11,3 +11,5 @@ const dashboardSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId], ref: "courses"
     }
 })
+
+module.exports = mongoose.model("Dashboard", dashboardSchema)

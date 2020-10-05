@@ -77,7 +77,8 @@ const UserSchema = new mongoose.Schema({
         contentType: String
     },
     course: {
-        type: [mongoose.Schema.Types.ObjectId], ref: "courses"
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Courses"
     },
     password: {
         type: String,
@@ -93,4 +94,4 @@ UserSchema.virtual("url").get(function(){
     return `/${this._id}`;
   });
 
-const User = module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);
