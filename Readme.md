@@ -24,6 +24,8 @@ Method          | Route                     | Description
 ===================
     POST    | {{baseURL}}                     | firstName, lastName, email, password are required
     GET     | {{baseURL}}                     | this returns all users details
+    PUT     | {{baseURL}}/:id                 | this takes data to be edited with userID
+    DELETE  | {{baseURL}}/:id                 | this takes the userID to be deleted
 
     POST    | {{baseURL}}/courses/            | title, description, durationPerQuestion, totalQuestion, headline, price are required
     GET     | {{baseURL}}/courses/            | this returns all courses
@@ -52,6 +54,7 @@ The `{{baseURL}}` changes depending on the user of the API and the route that wo
 The root user is still at index.js and no user role is implemented yet. This is still to test all API call to the route and may sure they carry out what is needed. In this version the routes that are working fine are
 
 * post, get | {{baseURL}}
+* put, delete | {{baseURL}}/:id
 * post, get | {{baseURL}}/courses
 * put, delete | {{baseURL}}/courses/:id
 * post, get | {{baseURL}}/courses/:id/article
@@ -59,12 +62,11 @@ The root user is still at index.js and no user role is implemented yet. This is 
 * post, get | {{baseURL}}//courses/:id/question
 * put, delete | {{baseURL}}/question/:idQ
 * post      | {{baseURL}}/application
+* delete    | {{baseURL}}/application/:id
 
 This route is still under development to meet up with up with the version 1.0
-* delete    | {{baseURL}}/application/:id
+* *
 
 This route are upcoming route for version 1.0
 * Route for tutor to see all the student who enrolled for the course
 * Route for tutor to see all the course they have
-* Update User
-* Delete User
