@@ -76,7 +76,7 @@ const UserSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
-    course: {
+    courses: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "Courses"
     },

@@ -4,8 +4,6 @@ const bcrypt = require("bcrypt")
 
 const User = require("../models/user.model")
 const Course = require("../models/course.model")
-const Article = require("../models/article.model")
-const Question = require("../models/question.model")
 const middlewares = require("../middlewares/index.middleware")
 const auth = require("../middlewares/auth.middleware")
 

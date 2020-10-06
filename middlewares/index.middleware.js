@@ -168,35 +168,22 @@ module.exports.newApplication = async (application, callback) => {
             console.log(`${err} from application find user`)
             return err
         } else {
-            foundUser.course.push(application.appID)
+            foundUser.courses.push(application.appID)
             foundUser.save(callback)
         }
     })
 }
 
-module.exports.delApplication = (application, callback) => {
-    var newApplication
-    User.findById(
+module.exports.delApplication = async (application, callback) => {
+    await User.findById(
         application.id, (err, foundUser) => {
             if (err) {
                 return err
             } else {
-                newApplication = foundUser.course.filter((course) => {
+                foundUser.updateOne({"courses": foundUser.courses.filter((course) => { 
                     return course != application.appID
-                })
-                console.log(newApplication)
+                })}, callback)
             }
         }
-    ), callback
-
-    console.log(newApplication)
-
-    // User.findByIdAndUpdate(
-    //     application.id,
-    //     newApplication,
-    //     console.log(newApplication),
-    //     {new: true, upsert: true},
-    //     console.log(callback),
-    //     callback
-    // )
+    )
 }

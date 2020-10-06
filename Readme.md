@@ -66,3 +66,5 @@ This route is still under development to meet up with up with the version 1.0
 This route are upcoming route for version 1.0
 * Route for tutor to see all the student who enrolled for the course
 * Route for tutor to see all the course they have
+* Update User
+* Delete User
