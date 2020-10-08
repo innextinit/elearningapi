@@ -143,12 +143,24 @@ const CourseSchema = new mongoose.Schema({
     language: {
         type: String,
         enum: ["En", "Yr", "Dot", "Sp"],
-        default: "En"
+        default: "En",
+        validate: {
+            validator: (value) => {
+                return /(En|Yr|Dot|Sp)/.test(value)
+            },
+            message: problem => `${problem.value} is not an allowed language type`
+        }
     },
     statusLabel: {
         type: String,
         enum: ["active", "archive", "deleted", "isPrivate", "notActive"],
-        default: "notActive"
+        default: "notActive",
+        validate: {
+            validator: (value) => {
+                return /(active|archive|deleted|isPrivate|notActive)/.test(value)
+            },
+            message: problem => `${problem.value} is not a vaild status`
+        }
     }
 }, {timestamps: true})
 
