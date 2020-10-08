@@ -2,16 +2,20 @@ const User = require("../models/user.model")
 const Course = require("../models/course.model")
 const Article = require("../models/article.model")
 const Question = require("../models/question.model")
+const auth = require("../middlewares/auth.middleware")
+const validate = require("../middlewares/validate.middleware")
 const bcrypt = require("bcrypt");
 const { application } = require("express");
 
+
 // user
-module.exports.newUser = async (user, callback) => {
-    User.create(user, (err, newUser) => {
+module.exports.newUser = (user, callback) => {
+    User.create(newUser, (err, newUser) => {
         if (err) {
             console.log(`${err} from create user`)
             return err
         } else {
+
             newUser.save(callback)
         }
     })
@@ -79,38 +83,7 @@ module.exports.courseUpdate = (course, callback) => {
 }
 
 // article
-module.exports.delArticle = (article, callback) => {
-    Article.findByIdAndDelete(
-        article.idA,
-        callback
-    )
-}
-
-module.exports.newArticle = (article, callback) => {
-    Article.create(article, (err, newArticle) => {
-        if (err) {
-            console.log(`${err} from create article`)
-            console.log(err)
-        } else {
-            newArticle.save(callback)
-        }
-    })
-}
-
-module.exports.articleUpdate = (article, callback) => {
-    Article.findByIdAndUpdate(
-        article.idA,
-        {
-            "section": article.section,
-            "title": article.title,
-            "body": article.body
-        },
-        {new: true, upsert: true},
-        callback
-    )
-}
-
-module.exports.getCourseArticle = (article, callback) => {
+module.exports.getCourseArticle = validate.havingCourse(), (article, callback) => {
     Article.find({courseID: article.courseID},
         callback
     )
@@ -119,40 +92,6 @@ module.exports.getCourseArticle = (article, callback) => {
 // question
 module.exports.getCourseQuestion = (question, callback) => {
     Question.find({courseID: question.courseID},
-        callback
-    )
-}
-
-module.exports.newQuestion = (question, callback) => {
-    Question.create(question, (err, newQuestion) => {
-        if (err) {
-            console.log(`${err} from create question`)
-            return err
-        } else {
-            newQuestion.save(callback)
-        }
-    })
-}
-
-module.exports.questionUpdate = (question, callback) => {
-    Question.findByIdAndUpdate(
-        question.idQ,
-        {
-            "question": question.question,
-            "option1": question.option1,
-            "option2": question.option2,
-            "option3": question.option3,
-            "option4": question.option4,
-            "correctAnswer": question.correctAnswer
-        },
-        {new: true, upsert: true},
-        callback
-    )
-}
-
-module.exports.delQuestion = (question, callback) => {
-    Question.findByIdAndDelete(
-        question.idQ,
         callback
     )
 }

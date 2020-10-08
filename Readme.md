@@ -64,8 +64,8 @@ The root user is still at index.js and no user role is implemented yet. This is 
 * post      | {{baseURL}}/application
 * delete    | {{baseURL}}/application/:id
 
-This route is still under development to meet up with up with the version 1.0
-* *
+This are still under development to meet up with up with the version 1.0
+* Validation of input before saving to the DB
 
 This route are upcoming route for version 1.0
 * Route for tutor to see all the student who enrolled for the course

@@ -3,7 +3,7 @@ const router = express.Router()
 const bcrypt = require("bcrypt")
 
 const Course = require("../models/course.model")
-const middlewares = require("../middlewares/index.middleware")
+const middlewares = require("../middlewares/user.middleware")
 const auth = require("../middlewares/auth.middleware")
 
 // user
@@ -21,11 +21,7 @@ router.post("/", (req, res) => {
         streetName: req.body.streetName,
         country: req.body.country,
         state: req.body.state,
-        hasActivated: req.body.hasActivated,
-        isDisable: req.body.isDisable,
-        role: req.body.role,
         DP: req.body.DP,
-        course: req.body.course,
         password: req.body.password
     }
 
@@ -53,11 +49,7 @@ router.put("/:id", (req, res) => {
         streetName: req.body.streetName,
         country: req.body.country,
         state: req.body.state,
-        hasActivated: req.body.hasActivated,
-        isDisable: req.body.isDisable,
-        role: req.body.role,
         DP: req.body.DP,
-        course: req.body.course,
         password: req.body.password
     }
 

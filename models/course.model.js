@@ -5,12 +5,24 @@ const CourseSchema = new mongoose.Schema({
         type: String,
         trim: true,
         require: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator : (value) => {
+                return /^\w+\s$/g.test(value)
+            },
+            message: problem => `${problem.value} is not a valid title`
+        }
     },
     description: {
         type:String,
         trim: true,
-        require: true
+        require: true,
+        validate: {
+            validator : (value) => {
+                return /^\w+\s$/g.test(value)
+            },
+            message: problem => `${problem.value} is not a valid description`
+        }
     },
     image: {
         data: Buffer,
@@ -20,33 +32,75 @@ const CourseSchema = new mongoose.Schema({
         type: Number,
         trim: true,
         default: 10,
-        require: true
+        require: true,
+        validate: {
+            validator: (value) => {
+                return /\d{1,2}/.test(value)
+            },
+            message: problem => `${problem.value} should be number is seconds`
+        }
     },
     totalQuestion: {
         type: Number,
         trim: true,
-        require: true
+        require: true,
+        validate: {
+            validator: (value) => {
+                return /\d{1,2}/.test(value)
+            },
+            message: problem => `${problem.value} should be total number of questions`
+        }
     },
     headline: {
         type: String,
         trim: true,
-        require: true
+        require: true,
+        validate: {
+            validator : (value) => {
+                return /^(\w+\s){30,500}$/g.test(value)
+            },
+            message: problem => `${problem.value} is not a valid description`
+        }
     },
     isPaid: {
         type: Boolean,
-        default: true
+        default: true,
+        validate: {
+            validator: (value) => {
+                return /(true|false)/
+            },
+            message: problem => `${problem.value} is not a valid Boolean expression`
+        }
     },
     isPrivate: {
         type: Boolean,
-        default: false
+        default: false,
+        validate: {
+            validator: (value) => {
+                return /(true|false)/
+            },
+            message: problem => `${problem.value} is not a valid Boolean expression`
+        }
     },
     numTeachers: {
         type: Number,
-        default: 1
+        default: 1,
+        validate: {
+            validator: (value) => {
+                return /\d{1,5}/.test(value)
+            },
+            message: problem => `${problem.value} should be total number of tutors`
+        }
     },
     price: {
         type: Number,
         require: true,
+        validate: {
+            validator: (value) => {
+                return /(true|false)/
+            },
+            message: problem => `${problem.value} is not a valid Boolean expression`
+        }
     },
     priceCurrency: {
         type: String,
@@ -56,18 +110,35 @@ const CourseSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: "tutor",
         require: true,
-        trim: true,
+        validate: {
+            validator: (value) => {
+                return /^[a-f\d]{24}$/.test(value)
+            },
+            message: problem => `${problem.value} is not a valid ObjectId`
+        }
     },
     archiveTime : {
         type: Date,
     },
     primaryCategory: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: "Category"
+        ref: "Category",
+        validate: {
+            validator: (value) => {
+                return /^[a-f\d]{24}$/.test(value)
+            },
+            message: problem => `${problem.value} is not a valid ObjectId`
+        }
     },
     subCategory: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: "Subcategory"
+        ref: "Subcategory",
+        validate: {
+            validator: (value) => {
+                return /^[a-f\d]{24}$/.test(value)
+            },
+            message: problem => `${problem.value} is not a valid ObjectId`
+        }
     },
     language: {
         type: String,
