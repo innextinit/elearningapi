@@ -2,7 +2,7 @@
 
 This is the API for the test Elearning site am working on. This site is to show my learning of Backend with JavaScript i.e [Node.JS](http://nodejs.org). To the best of my learning I am building to have an Industry standard working API that I would be consuming with JavaScript framework.
 
-The framework and package I will/am using include [MongoDB](https://mongodb.com), [Express](https://expressjs.com), [Mongoose](https://mongoosejs.com)
+I will/am using [MongoDB](https://mongodb.com), [Express](https://expressjs.com), [Mongoose](https://mongoosejs.com), [Bcrypt]()
 
 ## Installation
 
@@ -47,7 +47,7 @@ Method          | Route                     | Description
 
 ## Futher Explaination
 
-The `{{baseURL}}` changes depending on the user of the API and the route that would be available to the user. On local host the `{{baseURL}}` for normal user is `localhost:2020`, for tutor is `localhost:2020/tutor/`, for admin is `localhost:2020/admin/` and for custom service is `localhost:2020/cs/`.
+The `{{baseURL}}` changes depending on the user of the API and the route that would be available to the user. Here are what the `{{baseURL}}` is for normal user `localhost:2020`, for tutor `localhost:2020/tutor/`, for admin `localhost:2020/admin/` and for custom service `localhost:2020/cs/`.
 
 ## Version 1.0
 
@@ -65,8 +65,6 @@ The root user is still at index.js and no user role is implemented yet. This is 
 * delete    | {{baseURL}}/application/:id
 
 This are still under development to meet up with up with the version 1.0
-* Validation of input before saving to the DB
-
-This route are upcoming route for version 1.0
-* Route for tutor to see all the student who enrolled for the course
-* Route for tutor to see all the course they have
+* Routes to have function based on the role only
+* Test validation on models well
+* Use bcrypt to encrypt the password before saving
