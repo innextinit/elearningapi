@@ -47,7 +47,9 @@ Method          | Route                     | Description
 
 ## Futher Explaination
 
-The `{{baseURL}}` changes depending on the user of the API and the route that would be available to the user. Here are what the `{{baseURL}}` is for normal user `localhost:2020`, for tutor `localhost:2020/tutor/`, for admin `localhost:2020/admin/` and for custom service `localhost:2020/cs/`.
+Note that all route are not avalible for all user.
+
+The `{{baseURL}}` changes depending on the role of the user of this API. Here are what the `{{baseURL}}` is for normal user `localhost:2020`, for tutor `localhost:2020/tutor/`, for admin `localhost:2020/admin/` and for custom service `localhost:2020/cs/`.
 
 ## Version 1.0
 
