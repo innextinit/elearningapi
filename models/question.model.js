@@ -8,7 +8,7 @@ const QuestionSchema = new mongoose.Schema({
         unique: true,
         validate: {
             validator: (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} text should be within a-zA-Z0-9 and white space`
         }
@@ -19,7 +19,7 @@ const QuestionSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator: (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} text should be within a-zA-Z0-9 and white space`
         }
@@ -30,7 +30,7 @@ const QuestionSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator: (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} text should be within a-zA-Z0-9 and white space`
         }
@@ -41,7 +41,7 @@ const QuestionSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator: (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} text should be within a-zA-Z0-9 and white space`
         }
@@ -52,20 +52,9 @@ const QuestionSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator: (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} text should be within a-zA-Z0-9 and white space`
-        }
-    },
-    optionPicked: {
-        type: String,
-        trim: true,
-        require: true,
-        validate: {
-            validator: (value) => {
-                return /(option1|option2|option3|option4)/.test(value)
-            },
-            message: problem => `${problem.value} is not a valid option`
         }
     },
     correctAnswer: {

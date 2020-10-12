@@ -29,12 +29,16 @@ app.use(function(req, res, next) {
 });
 
 const indexRouter = require("./routes/index")
+const admin = require("./routes/admin")
 const users = require("./routes/user")
 const tutors = require("./routes/tutor")
+const cs = require("./routes/cs")
 
 app.use("/", indexRouter)
+app.use("/admin", admin)
 app.use("/user", users)
 app.use("/tutor", tutors)
+app.use("/cs", cs)
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`)

@@ -8,7 +8,7 @@ const CourseSchema = new mongoose.Schema({
         unique: true,
         validate: {
             validator : (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} is not a valid title`
         }
@@ -19,7 +19,7 @@ const CourseSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator : (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} is not a valid description`
         }
@@ -57,7 +57,7 @@ const CourseSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator : (value) => {
-                return /^(\w+\s){30,500}$/g.test(value)
+                return /(\w+\s){30,500}/g.test(value)
             },
             message: problem => `${problem.value} is not a valid description`
         }
@@ -87,7 +87,7 @@ const CourseSchema = new mongoose.Schema({
         default: 1,
         validate: {
             validator: (value) => {
-                return /\d{1,5}/.test(value)
+                return /[1-5]{1}/.test(value)
             },
             message: problem => `${problem.value} should be total number of tutors`
         }

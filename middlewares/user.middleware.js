@@ -2,10 +2,12 @@ const User = require("../models/user.model")
 const Course = require("../models/course.model")
 const Article = require("../models/article.model")
 const Question = require("../models/question.model")
+const Delete = require("../delete/deleted.user.model")
 const auth = require("../middlewares/auth.middleware")
 const validate = require("../middlewares/validate.middleware")
 const bcrypt = require("bcrypt");
 const { application } = require("express");
+const { model } = require("../models/course.model")
 
 
 // user
@@ -37,8 +39,7 @@ module.exports.userUpdate = (user, callback) => {
             "streetName": user.streetName,
             "country": user.country,
             "state": user.state,
-            "DP": user.DP,
-            "password": user.password
+            "DP": user.DP
         },
         {new: true, upsert: true},
         callback
@@ -46,52 +47,54 @@ module.exports.userUpdate = (user, callback) => {
 }
 
 module.exports.delUser = (user, callback) => {
-    User.findByIdAndDelete(
+    User.findById(
         user.id,
-        callback
+       async (err, foundUser) => {
+            if (err) {
+                return err
+            } else {
+                 const delUser = {
+                    deleteUser: foundUser.toJSON()
+                }
+                console.log(`from convert .toJSON : \n ${delUser}`)
+               await Delete.create(delUser, (err, newDelUser) => {
+                    if (err) {
+                        return err
+                    } else {
+                        console.log(`from save to Delete forms : \n ${newDelUser}`)
+                        newDelUser.save()
+                    }
+                })
+               await User.findByIdAndDelete(user.id, callback)
+            }
+        }
     )
 }
 
 // course
-module.exports.delCourse = (course, callback) => {
-    Course.findByIdAndDelete(
-        course.id,
-        callback
-    )
-}
-
 module.exports.courses = (course, callback) => {
     const newCourse = new Course(course)
     newCourse.save(callback)
 }
 
-module.exports.courseUpdate = (course, callback) => {
-    Course.findByIdAndUpdate(
-        course.id,
-        {
-            "title": course.title,
-            "description": course.description,
-            "image": course.image,
-            "durationPerQuestion": course.durationPerQuestion,
-            "totalQuestion": course.totalQuestion,
-            "price": course.price,
-            "headline": course.headline
-        },
-        {new: true, upsert: true},
-        callback
-    )
-}
-
 // article
-module.exports.getCourseArticle = validate.havingCourse(), (article, callback) => {
+module.exports.getCourseArticle = (article, callback) => {
     Article.find({courseID: article.courseID},
         callback
     )
 }
 
 // question
+// user should not be able to get the correctAnswer
 module.exports.getCourseQuestion = (question, callback) => {
     Question.find({courseID: question.courseID},
+        callback
+    )
+}
+
+module.exports.checkAns = (question, callback) => {
+    Question.findById(
+        question.id,
         callback
     )
 }

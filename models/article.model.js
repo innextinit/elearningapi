@@ -8,7 +8,7 @@ const ArticleSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator : (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} is not a valid title`
         }
@@ -30,7 +30,7 @@ const ArticleSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator: (value) => {
-                return /^\w+\s$/g.test(value)
+                return /\w+\s/g.test(value)
             },
             message: problem => `${problem.value} text should be within a-zA-Z0-9 and white space`
         }
@@ -40,7 +40,7 @@ const ArticleSchema = new mongoose.Schema({
         ref: "Tutor",
         validate: {
             validator: (value) => {
-                return /^[a-f\d]{24}$/.test(value)
+                return /^[a-f\d]{24}$/g.test(value)
             },
             message: problem => `${problem.value} is not a valid ObjectId`
         }

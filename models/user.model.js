@@ -73,7 +73,7 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         validate: {
             validator: (value) => {
-                return /^([\w_-.]{3,})+@([\w_-.]{3,15})+.([a-zA-Z]{2,3})$/.test(value)
+                return /^([\w-.]{3,})+@([\w-.]{3,15})+.([a-zA-Z]{2,3})$/.test(value)
             },
             message: problem => `${problem.value} is not valid`
         }
@@ -167,12 +167,12 @@ const UserSchema = new mongoose.Schema({
     courses: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "Courses",
-        validate: {
-            validator: (value) => {
-                return /^[a-f/d]{24}$/.test(value)
-            },
-            message: problem => `${problem.value} is not a valid ObjectId`
-        }
+        // validate: {
+        //     validator: (value) => {
+        //         return /^[a-f/d]{24}$/.test(value)
+        //     },
+        //     message: problem => `${problem.value} is not a valid ObjectId`
+        // }
     },
     password: {
         type: String,
@@ -182,7 +182,7 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         validate: {
             validator: (value) => {
-                return /^([a-zA-Z0-9\W]{8,30})$/g.test(value)
+                return /^([(\w)?+(\W)?]{8,})$/g.test(value)
             },
             message: problem => `${problem.value} is not a valid password`
         }

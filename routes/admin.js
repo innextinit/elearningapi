@@ -1,22 +1,18 @@
 const express = require("express")
 const router = express.Router()
-const bcrypt = require("bcrypt")
 
 const User = require("../models/user.model")
 const Course = require("../models/course.model")
-const middlewares = require("../middlewares/tutor.middleware")
-
+const Article = require("../models/article.model")
+const Question = require("../models/question.model")
+const middlewares = require("../middlewares/index.middleware")
 // user
 router.get("/", (req, res) => {
-    const course = {
-        courseID: req.params.courseID
-    }
-
-    middlewares.getCourseUser(course, (err, data) => {
+    User.find({}).populate("course").exec((err, user) => {
         if (err) {
             res.json({"error": err})
         } else {
-            res.json(data)
+            res.json(user)
         }
     })
 })
@@ -322,5 +318,6 @@ router.delete("/application/:id", (req, res) => {
         }
    })
 })
+
 
 module.exports = router;
