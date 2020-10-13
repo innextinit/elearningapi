@@ -1,14 +1,21 @@
 const express = require("express")
 const router = express.Router()
-
-const User = require("../models/user.model")
-const Course = require("../models/course.model")
-const Article = require("../models/article.model")
-const Question = require("../models/question.model")
 const middlewares = require("../middlewares/index.middleware")
+
+// courses
+router.get("/courses", (req, res) => {
+    middlewares.course((err, data) => {
+        if (err) {
+            res.json({"error": err})
+        } else {
+            res.json(data)
+        }
+    })
+})
+
 // user
 router.get("/", (req, res) => {
-    User.find({}).populate("course").exec((err, user) => {
+    middlewares.user((err, user) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -32,7 +39,9 @@ router.post("/", (req, res) => {
         country: req.body.country,
         state: req.body.state,
         DP: req.body.DP,
-        password: req.body.password
+        password: req.body.password,
+        role: req.body.role,
+        courses: req.body.courses
     }
 
     middlewares.newUser(user, (err, data) => {
@@ -40,6 +49,21 @@ router.post("/", (req, res) => {
             res.json({"error": err});
         } else {
             res.json(data);
+        }
+    })
+})
+
+// query
+router.get("/query", (req, res) => {
+    const userEmail = {
+        email: req.query.email
+    }
+
+    middlewares.findUser(userEmail, (err, data) => {
+        if (err) {
+            res.json({"error": err})
+        } else {
+            res.json(data)
         }
     })
 })
@@ -60,7 +84,9 @@ router.put("/:id", (req, res) => {
         country: req.body.country,
         state: req.body.state,
         DP: req.body.DP,
-        password: req.body.password
+        password: req.body.password,
+        role: req.body.role,
+        courses: req.body.courses
     }
 
     middlewares.userUpdate(user, (err, data) => {
@@ -87,28 +113,12 @@ router.delete("/:id", (req, res) => {
 })
 
 // courses
-router.get("/courses", (req, res) => {
-    Course.find({}, (err, course) => {
-        if (err) {
-            res.json({"error": err})
-        } else {
-            res.json(course)
-        }
-    })
-})
-
-router.post("/courses", (req, res) => {
-    const course = {
-        title: req.body.title,
-        description: req.body.description,
-        // image: req.file.image,
-        durationPerQuestion: req.body.durationPerQuestion,
-        totalQuestion: req.body.totalQuestion,
-        price: req.body.price,
-        headline: req.body.headline
+router.get("/courses/query", (req, res) => {
+    const courseTitle = {
+        title: req.query.title
     }
 
-    middlewares.courses(course, (err, data) => {
+    middlewares.findCourse(courseTitle, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -126,7 +136,16 @@ router.put("/courses/:id", (req, res) => {
         durationPerQuestion: req.body.durationPerQuestion,
         totalQuestion: req.body.totalQuestion,
         price: req.body.price,
-        headline: req.body.headline
+        headline: req.body.headline,
+        isPaid: req.body.isPaid,
+        isPrivate: req.body.isPrivate,
+        numTeachers: req.body.numTeachers,
+        priceCurrency: req.body.priceCurrency,
+        tutor: req.body.tutor,
+        primaryCategory: req.body.primaryCategory,
+        subCategory: req.body.subCategory,
+        language: req.body.language,
+        statusLabel: req.body.statusLabel
     }
 
     middlewares.courseUpdate(course, (err, data) => {
@@ -153,24 +172,6 @@ router.delete("/courses/:id", (req, res) => {
 })
 
 // article
-router.post("/courses/:id/article", (req, res) => {
-    const article = {
-        courseID: req.params.id,
-        section: req.body.section,
-        title: req.body.title,
-        body: req.body.body
-    }
-
-    middlewares.newArticle(article, (err, data) => {
-        if (err) {
-            res.json({"error": err})
-        } else {
-            res.json(data)
-        }
-    })
-
-})
-
 router.put("/article/:idA", (req, res) => {
     const article = {
         idA: req.params.idA,
@@ -180,20 +181,6 @@ router.put("/article/:idA", (req, res) => {
     }
 
     middlewares.articleUpdate(article, (err, data) => {
-        if (err) {
-            res.json({"error": err})
-        } else {
-            res.json(data)
-        }
-    })
-})
-
-router.get("/courses/:id/article", (req, res) => {
-    const article = {
-        courseID: req.params.id
-    }
-
-    middlewares.getCourseArticle(article, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -216,34 +203,12 @@ router.delete("/article/:idA", (req, res) => {
     })
 })
 
-// questions
-router.post("/courses/:id/question", (req, res) => {
-    const question = {
-        courseID: req.params.id,
-        // tutor: req.user.id,
-        question: req.body.question,
-        option1: req.body.option1,
-        option2: req.body.option2,
-        option3: req.body.option3,
-        option4: req.body.option4,
-        correctAnswer: req.body.correctAnswer
-    }
-
-    middlewares.newQuestion(question, (err, data) => {
-        if (err) {
-            res.json({"error": err})
-        } else {
-            res.json(data)            
-        }
-    })
-})
-
-router.get("/courses/:id/question", (req, res) => {
-    const question = {
+router.get("/courses/:id/article", (req, res) => {
+    const article = {
         courseID: req.params.id
     }
 
-    middlewares.getCourseQuestion(question, (err, data) => {
+    middlewares.getCourseArticle(article, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -252,6 +217,7 @@ router.get("/courses/:id/question", (req, res) => {
     })
 })
 
+// questions
 router.put("/question/:idQ", (req, res) => {
     const question = {
         idQ: req.params.idQ,
@@ -260,7 +226,9 @@ router.put("/question/:idQ", (req, res) => {
         option2: req.body.option2,
         option3: req.body.option3,
         option4: req.body.option4,
-        correctAnswer: req.body.correctAnswer
+        correctAnswer: req.body.correctAnswer,
+        // tutor: req.user._id,
+        tutor: req.body.tutor
     }
 
     middlewares.questionUpdate(question, (err, data) => {
@@ -286,38 +254,18 @@ router.delete("/question/:idQ", (req, res) => {
     })
 })
 
-// application
-router.post("/application", (req, res) => {
-    const application = {
-        appID: req.body.course_id,
-        //_id: req.user._id,
-        _id: req.body._id
+router.get("/courses/:id/question", (req, res) => {
+    const question = {
+        courseID: req.params.id
     }
 
-    middlewares.newApplication(application, (err, newApplication) => {
+    middlewares.getCourseQuestion(question, (err, data) => {
         if (err) {
-            res.json({"errror": err});
+            res.json({"error": err})
         } else {
-            res.json(newApplication)
+            res.json(data)
         }
     })
 })
 
-router.delete("/application/:id", (req, res) => {
-    const application = {
-        //  _id: req.user._id,
-        id: req.params.id,
-        appID: req.body.appID
-    }
-
-    middlewares.delApplication(application, (err, data) => {
-        if (err) {
-            res.json({"errror": err});
-        } else {
-            res.json(data)
-        }
-   })
-})
-
-
-module.exports = router;
+module.exports = router

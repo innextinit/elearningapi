@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const CourseSchema = new mongoose.Schema({
     title: {
@@ -8,7 +8,7 @@ const CourseSchema = new mongoose.Schema({
         unique: true,
         validate: {
             validator : (value) => {
-                return /\w+\s/g.test(value)
+                return /[\w+\s'.]{6,100}/g.test(value)
             },
             message: problem => `${problem.value} is not a valid title`
         }
@@ -19,7 +19,7 @@ const CourseSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator : (value) => {
-                return /\w+\s/g.test(value)
+                return /[\w+\s'.,]/g.test(value)
             },
             message: problem => `${problem.value} is not a valid description`
         }
@@ -57,7 +57,7 @@ const CourseSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator : (value) => {
-                return /(\w+\s){30,500}/g.test(value)
+                return /[\w+\s'.]{30,300}/g.test(value)
             },
             message: problem => `${problem.value} is not a valid description`
         }
@@ -112,32 +112,27 @@ const CourseSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator: (value) => {
-                return /^[a-f\d]{24}$/.test(value)
+                return /^[a-f\d]{24}$/g.test(value)
             },
             message: problem => `${problem.value} is not a valid ObjectId`
         }
     },
-    archiveTime : {
-        type: Date,
-    },
     primaryCategory: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "Category",
+        type: String,
         validate: {
             validator: (value) => {
-                return /^[a-f\d]{24}$/.test(value)
+                return /[a-zA-Z]/g.test(value)
             },
-            message: problem => `${problem.value} is not a valid ObjectId`
+            message: problem => `${problem.value} is not valid`
         }
     },
     subCategory: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "Subcategory",
+        type: String,
         validate: {
             validator: (value) => {
-                return /^[a-f\d]{24}$/.test(value)
+                return /[a-zA-Z]/g.test(value)
             },
-            message: problem => `${problem.value} is not a valid ObjectId`
+            message: problem => `${problem.value} is not valid`
         }
     },
     language: {

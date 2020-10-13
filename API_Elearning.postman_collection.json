@@ -1,0 +1,1841 @@
+{
+	"info": {
+		"_postman_id": "ae61e1ef-5be7-45f4-90ec-c620d3bcddc0",
+		"name": "API Elearning",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{adminURL}}",
+							"host": [
+								"{{adminURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{adminURL}}/query?email=test@test.com",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"query"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"description": "user query"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "cs",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "cs",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "cscs@css.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "passwordIs12ChaLong",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Prof",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "cs",
+									"type": "text"
+								},
+								{
+									"key": "courses",
+									"value": "5f7aacca8be6d50590ad40aa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{adminURL}}",
+							"host": [
+								"{{adminURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "Ini",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lastName",
+									"value": "KolaAde",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "test@tutor.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "passwordIs12ChaLong",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Prof",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "tutor",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "courses",
+									"value": "5f7aacca8be6d50590ad40aa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{adminURL}}/:id",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"description": "userID",
+									"key": "id",
+									"value": "5f844b59100530375829afe1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{adminURL}}/:id",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"description": "userID",
+									"key": "id",
+									"value": "5f844b59100530375829afe1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{adminURL}}/courses",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{adminURL}}/courses/query?title=Welcome to NodeJS",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"courses",
+								"query"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Welcome to NodeJS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Node.JS for Starter",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This give's you basic Introduction to Node.JS and use of API",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "durationPerQuestion",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "totalQuestion",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "headline",
+									"value": "Let's study together Node.Js for Strarters",
+									"type": "text"
+								},
+								{
+									"key": "isPaid",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "isPrivate",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "primaryCategory",
+									"value": "programming",
+									"type": "text"
+								},
+								{
+									"key": "subCategory",
+									"value": "Node",
+									"type": "text"
+								},
+								{
+									"key": "statusLabel",
+									"value": "active",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{adminURL}}/courses/:id",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"courses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{adminURL}}/courses/:id",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"courses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "course id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{adminURL}}/courses/:id/article/",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"article",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Introduction (Update",
+									"type": "text"
+								},
+								{
+									"key": "section",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "What is Node.JS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{adminURL}}/article/:idA",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"article",
+								":idA"
+							],
+							"variable": [
+								{
+									"key": "idA",
+									"value": "5f860be3ba37123408d7124d",
+									"description": "articleID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{adminURL}}/article/:idA",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"article",
+								":idA"
+							],
+							"variable": [
+								{
+									"key": "idA",
+									"value": "5f860be3ba37123408d7124d",
+									"description": "article id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{adminURL}}/courses/:id/question",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"question"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "course id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "question",
+									"value": "update first",
+									"type": "text"
+								},
+								{
+									"key": "option1",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "option2",
+									"value": "b",
+									"type": "text"
+								},
+								{
+									"key": "option3",
+									"value": "c",
+									"type": "text"
+								},
+								{
+									"key": "option4",
+									"value": "d",
+									"type": "text"
+								},
+								{
+									"key": "correctAnswers",
+									"value": "option1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{adminURL}}/question/:idQ",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"question",
+								":idQ"
+							],
+							"variable": [
+								{
+									"key": "idQ",
+									"value": "5f860be8ba37123408d7124e",
+									"description": "questonID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{adminURL}}/question/:idQ",
+							"host": [
+								"{{adminURL}}"
+							],
+							"path": [
+								"question",
+								":idQ"
+							],
+							"variable": [
+								{
+									"key": "idQ",
+									"value": "5f860be8ba37123408d7124e",
+									"description": "questonID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "cs",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{csURL}}/?email=cscs@css.com",
+							"host": [
+								"{{csURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "cscs@css.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "hasActivated",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "isDisable",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{csURL}}/:id",
+							"host": [
+								"{{csURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f860b5dba37123408d7124b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{csURL}}/courses?title=Welcome to NodeJS",
+							"host": [
+								"{{csURL}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Welcome to NodeJS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Node.JS for Starter",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This give's you basic Introduction to Node.JS and use of API",
+									"type": "text"
+								},
+								{
+									"key": "durationPerQuestion",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "totalQuestion",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "headline",
+									"value": "Let's study together Node.Js for Strarters",
+									"type": "text"
+								},
+								{
+									"key": "isPaid",
+									"value": "false",
+									"type": "text"
+								},
+								{
+									"key": "isPrivate",
+									"value": "false",
+									"type": "text"
+								},
+								{
+									"key": "primaryCategory",
+									"value": "programming",
+									"type": "text"
+								},
+								{
+									"key": "subCategory",
+									"value": "Node",
+									"type": "text"
+								},
+								{
+									"key": "statusLabel",
+									"value": "archive",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{csURL}}/courses/:id",
+							"host": [
+								"{{csURL}}"
+							],
+							"path": [
+								"courses",
+								":id"
+							],
+							"variable": [
+								{
+									"description": "courseID",
+									"key": "id",
+									"value": "5f8470f464702e1630d05640"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{csURL}}/courses/:id/article/",
+							"host": [
+								"{{csURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"article",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{csURL}}/courses/:id/question",
+							"host": [
+								"{{csURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"question"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "course id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "application",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "appID",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{userURL}}/application/:id",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								"application",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f844847beb78115d4471c13",
+									"description": "userID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "tutor",
+			"item": [
+				{
+					"name": "user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "courseID",
+									"value": "5f7aacca8be6d50590ad40aa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{tutorURL}}/",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "tutorID",
+									"value": "5f844b59100530375829afe1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{tutorURL}}/courses/",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"courses",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Welcome to NodeJS",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This gives you basic Introduction to Node.JS and use of API",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "durationPerQuestion",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "totalQuestion",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "headline",
+									"value": "Let's study together Node.Js for Starters",
+									"type": "text"
+								},
+								{
+									"key": "tutor",
+									"value": "5f844b59100530375829afe1",
+									"type": "text"
+								},
+								{
+									"key": "isPaid",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "isPrivate",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "priceCurrency",
+									"value": "USD",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "primaryCategory",
+									"value": "programming",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "subCategory",
+									"value": "MongoDB",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{tutorURL}}/courses/",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"courses",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Working with ExpressJS",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This give's you basic Introduction to Node.JS and use of API",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "durationPerQuestion",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "totalQuestion",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "headline",
+									"value": "Let's study together Node.Js for Strarters",
+									"type": "text"
+								},
+								{
+									"key": "tutor",
+									"value": "5f844b59100530375829afe1",
+									"type": "text"
+								},
+								{
+									"key": "isPaid",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "isPrivate",
+									"value": "false",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "primaryCategory",
+									"value": "programming",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "subCategory",
+									"value": "ExpressJS",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "statusLabel",
+									"value": "active",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{tutorURL}}/courses/:id",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"courses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{tutorURL}}/courses/:id",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"courses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f848b9ff380860f8c50ac65",
+									"description": "course id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "section",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "In this class we would talk about how to use ExpressJS with Node.JS",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Introduction",
+									"type": "text"
+								},
+								{
+									"key": "tutor",
+									"value": "5f844b59100530375829afe1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{tutorURL}}/courses/:id/article",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"article"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{tutorURL}}/courses/:id/article/",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"article",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Introduction Check",
+									"type": "text"
+								},
+								{
+									"key": "section",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "What is Node.JS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{tutorURL}}/article/:idA",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"article",
+								":idA"
+							],
+							"variable": [
+								{
+									"key": "idA",
+									"value": "5f8490bff9e4320d9461e1ba",
+									"description": "articleID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{tutorURL}}/article/:idA",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"article",
+								":idA"
+							],
+							"variable": [
+								{
+									"key": "idA",
+									"value": "5f8490bff9e4320d9461e1ba",
+									"description": "article id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "question",
+									"value": "question 2",
+									"type": "text"
+								},
+								{
+									"key": "option1",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "option2",
+									"value": "b",
+									"type": "text"
+								},
+								{
+									"key": "option3",
+									"value": "c",
+									"type": "text"
+								},
+								{
+									"key": "option4",
+									"value": "d",
+									"type": "text"
+								},
+								{
+									"key": "correctAnswer",
+									"value": "option2",
+									"type": "text"
+								},
+								{
+									"key": "tutor",
+									"value": "5f844b59100530375829afe1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{tutorURL}}/courses/:id/question",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"question"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{tutorURL}}/courses/:id/question",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"question"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "question",
+									"value": "question test",
+									"type": "text"
+								},
+								{
+									"key": "option1",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "option2",
+									"value": "b",
+									"type": "text"
+								},
+								{
+									"key": "option3",
+									"value": "c",
+									"type": "text"
+								},
+								{
+									"key": "option4",
+									"value": "d",
+									"type": "text"
+								},
+								{
+									"key": "correctAnswer",
+									"value": "option3",
+									"type": "text"
+								},
+								{
+									"key": "tutor",
+									"value": "5f844b59100530375829afe1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{tutorURL}}/question/:idQ",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"question",
+								":idQ"
+							],
+							"variable": [
+								{
+									"key": "idQ",
+									"value": "5f857016d0712c2dbc57b416",
+									"description": "questonID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{tutorURL}}/question/:idQ",
+							"host": [
+								"{{tutorURL}}"
+							],
+							"path": [
+								"question",
+								":idQ"
+							],
+							"variable": [
+								{
+									"key": "idQ",
+									"value": "5f857016d0712c2dbc57b416",
+									"description": "questonID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "Inioluwa",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Kola",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "passwordIs12ChaLong",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Prof",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{userURL}}",
+							"host": [
+								"{{userURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "Ini",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "KolaAde",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "passwordIs12ChaLong",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Prof",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{userURL}}/:id",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"description": "userID",
+									"key": "id",
+									"value": "5f7c87510515ea2808fa3d77"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{userURL}}/:id",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"description": "userID",
+									"key": "id",
+									"value": "5f82f6f484ce8b30803a5c47"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{userURL}}/courses/",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								"courses",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userURL}}/courses/:id/article/",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"article",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f7aacca8be6d50590ad40aa",
+									"description": "courseID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{userURL}}/courses/:id/question",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								"courses",
+								":id",
+								"question"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f7aacca8be6d50590ad40aa",
+									"description": "course id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "question",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "optionPicked",
+									"value": "option1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{userURL}}/question/:id",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								"question",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f7aae1f8be6d50590ad40ae",
+									"description": "questionID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "application",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "course_id",
+									"value": "5f7aacca8be6d50590ad40aa",
+									"description": "appID",
+									"type": "text"
+								},
+								{
+									"key": "_id",
+									"value": "5f7aacb38be6d50590ad40a9",
+									"description": "userID",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{userURL}}/application",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								"application"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "application",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "appID",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{csURL}}/application/:id",
+							"host": [
+								"{{csURL}}"
+							],
+							"path": [
+								"application",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f844847beb78115d4471c13",
+									"description": "userID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

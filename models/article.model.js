@@ -4,11 +4,10 @@ const ArticleSchema = new mongoose.Schema({
     title: {
         type: String,
         trim: true,
-        unique: true,
         require: true,
         validate: {
             validator : (value) => {
-                return /\w+\s/g.test(value)
+                return /[\w+\s'.]/g.test(value)
             },
             message: problem => `${problem.value} is not a valid title`
         }
@@ -30,7 +29,7 @@ const ArticleSchema = new mongoose.Schema({
         require: true,
         validate: {
             validator: (value) => {
-                return /\w+\s/g.test(value)
+                return /[\w+\s'.,]/g.test(value)
             },
             message: problem => `${problem.value} text should be within a-zA-Z0-9 and white space`
         }

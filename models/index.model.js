@@ -5,7 +5,7 @@ const dashboardSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId], ref: "courses",
         validate: {
             validator: (value) => {
-                return /^[a-f/d]{24}$/.test(value)
+                return /^[a-f\d]{24}$/.test(value)
             },
             message: problem => `${problem.value} is not a valid ObjectId`
         }
@@ -14,7 +14,7 @@ const dashboardSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId], ref: "courses",
         validate: {
             validator: (value) => {
-                return /^[a-f/d]{24}$/.test(value)
+                return /^[a-f\d]{24}$/.test(value)
             },
             message: problem => `${problem.value} is not a valid ObjectId`
         }
@@ -23,7 +23,7 @@ const dashboardSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId], ref: "courses",
         validate: {
             validator: (value) => {
-                return /^[a-f/d]{24}$/.test(value)
+                return /^[a-f\d]{24}$/.test(value)
             },
             message: problem => `${problem.value} is not a valid ObjectId`
         }

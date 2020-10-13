@@ -7,61 +7,19 @@ const { application } = require("express");
 
 // user
 module.exports.getCourseUser = (course, callback) => {
-    User.find({courses: course.courseID},
-        callback
-    )
-}
-
-module.exports.newUser = async (user, callback) => {
-    User.create(user, (err, newUser) => {
-        if (err) {
-            console.log(`${err} from create user`)
-            return err
-        } else {
-            newUser.save(callback)
-        }
-    })
-}
-
-module.exports.userUpdate = (user, callback) => {
-    User.findByIdAndUpdate(
-        user.id,
-        {
-            "firstName": user.firstName,
-            "lastName": user.lastName,
-            "otherName": user.otherName,
-            "title": user.title,
-            "gender": user.gender,
-            "phone": user.phone,
-            "email": user.email,
-            "zipcode": user.zipcode,
-            "city": user.city,
-            "streetName": user.streetName,
-            "country": user.country,
-            "state": user.state,
-            "DP": user.DP,
-            "password": user.password
-        },
-        {new: true, upsert: true},
-        callback
-    )
-}
-
-module.exports.delUser = (user, callback) => {
-    User.findByIdAndDelete(
-        user.id,
+    User.find(
+        {courses: course.courseID},
         callback
     )
 }
 
 // course
-module.exports.delCourse = (course, callback) => {
-    Course.findByIdAndDelete(
-        course.id,
+module.exports.getCourse = (courses, callback) => {
+    Course.find(
+        {tutor: courses.tutorID},
         callback
     )
 }
-
 module.exports.courses = (course, callback) => {
     const newCourse = new Course(course)
     newCourse.save(callback)
@@ -77,20 +35,79 @@ module.exports.courseUpdate = (course, callback) => {
             "durationPerQuestion": course.durationPerQuestion,
             "totalQuestion": course.totalQuestion,
             "price": course.price,
-            "headline": course.headline
+            "headline": course.headline,
+            "tutor": course.tutor,
+            "isPaid": course.isPaid,
+            "isPrivate": course.isPrivate,
+            "numTeachers": course.numTeachers,
+            "priceCurrency": course.priceCurrency,
+            "tutor": course.tutor,
+            "primaryCategory": course.primaryCategory,
+            "subCategory": course.subCategory,
+            "language": course.language,
+            "statusLabel": course.statusLabel
         },
         {new: true, upsert: true},
         callback
     )
 }
 
-// article
-module.exports.delArticle = (article, callback) => {
-    Article.findByIdAndDelete(
-        article.idA,
+module.exports.delCourse = async (course, callback) => {
+    await Article.find(
+        {courseID: course.id}, async (err, foundArticles) => {
+            if (err) {
+                return err
+            } else {
+                for (const _id in foundArticles) {
+                    if (foundArticles.hasOwnProperty(_id)) {
+                        const element = foundArticles[_id];
+                       await Article.findByIdAndDelete(
+                            element._id,
+                            (err, data) => {
+                                if (err) {
+                                    return err
+                                } else {
+                                    console.log(data)
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    )
+
+    await Question.find(
+        {courseID: course.id}, async (err, foundQuestions) => {
+            if (err) {
+                return err
+            } else {
+                for (const _id in foundQuestions) {
+                    if (foundQuestions.hasOwnProperty(_id)) {
+                        const element = foundQuestions[_id];
+                        await Question.findByIdAndDelete(
+                            element._id,
+                            (err, data) => {
+                                if (err) {
+                                    return err
+                                } else {
+                                    console.log(data)
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    ),
+
+    await Course.findByIdAndDelete(
+        course.id,
         callback
     )
 }
+
+// article
 
 module.exports.newArticle = (article, callback) => {
     Article.create(article, (err, newArticle) => {
@@ -118,6 +135,13 @@ module.exports.articleUpdate = (article, callback) => {
 
 module.exports.getCourseArticle = (article, callback) => {
     Article.find({courseID: article.courseID},
+        callback
+    )
+}
+
+module.exports.delArticle = (article, callback) => {
+    Article.findByIdAndDelete(
+        article.idA,
         callback
     )
 }
@@ -160,32 +184,5 @@ module.exports.delQuestion = (question, callback) => {
     Question.findByIdAndDelete(
         question.idQ,
         callback
-    )
-}
-
-// application
-module.exports.newApplication = async (application, callback) => {
-    User.findById(application._id, (err, foundUser) => {
-        if (err) {
-            console.log(`${err} from application find user`)
-            return err
-        } else {
-            foundUser.courses.push(application.appID)
-            foundUser.save(callback)
-        }
-    })
-}
-
-module.exports.delApplication = async (application, callback) => {
-    await User.findById(
-        application.id, (err, foundUser) => {
-            if (err) {
-                return err
-            } else {
-                foundUser.updateOne({"courses": foundUser.courses.filter((course) => { 
-                    return course != application.appID
-                })}, callback)
-            }
-        }
     )
 }

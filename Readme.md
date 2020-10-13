@@ -23,12 +23,12 @@ $ node app.js
 Method          | Route                     | Description
 ===================
     POST    | {{baseURL}}                     | firstName, lastName, email, password are required
-    GET     | {{baseURL}}                     | this returns all users details
+    GET     | {{baseURL}}                     | this returns all users details or one with the query params
     PUT     | {{baseURL}}/:id                 | this takes data to be edited with userID
     DELETE  | {{baseURL}}/:id                 | this takes the userID to be deleted
 
     POST    | {{baseURL}}/courses/            | title, description, durationPerQuestion, totalQuestion, headline, price are required
-    GET     | {{baseURL}}/courses/            | this returns all courses
+    GET     | {{baseURL}}/courses/            | this returns all courses or one with the query params
     PUT     | {{baseURL}}/courses/:id         | this takes data to be edited with courseID
     DELETE  | {{baseURL}}/courses/:id         | this takes the courseID to be deleted
 
@@ -47,26 +47,16 @@ Method          | Route                     | Description
 
 ## Futher Explaination
 
-Note that all route are not avalible for all user.
+The routes above is used to simplify the routes available and not all user have all the routes :). 
 
 The `{{baseURL}}` changes depending on the role of the user of this API. Here are what the `{{baseURL}}` is for normal user `localhost:2020`, for tutor `localhost:2020/tutor/`, for admin `localhost:2020/admin/` and for custom service `localhost:2020/cs/`.
 
 ## Version 1.0
 
-The root user is still at index.js and no user role is implemented yet. This is still to test all API call to the route and may sure they carry out what is needed. In this version the routes that are working fine are
+The version 1.0 is mainly to test all endpoint to see they carryout what they should. In this version we have four roles and they are admin with the route `{{adminURL}} or localhost:2020/admin,` the customer services with `{{csURL}} or localhost:2020/cs,` the tutor with `{{tutorURL}} or localhost:2020/tutor` and the user or student with `{{userURL}} or localhost:2020/.`
 
-* post, get | {{baseURL}}
-* put, delete | {{baseURL}}/:id
-* post, get | {{baseURL}}/courses
-* put, delete | {{baseURL}}/courses/:id
-* post, get | {{baseURL}}/courses/:id/article
-* put, delete | {{baseURL}}/article:idA
-* post, get | {{baseURL}}//courses/:id/question
-* put, delete | {{baseURL}}/question/:idQ
-* post      | {{baseURL}}/application
-* delete    | {{baseURL}}/application/:id
+Since version 1.0 is for testing endpoints only, `no authentication nor authorization` is put in place yet. The [API Elearning.postman_collection.json](`./API_Elearning.postman_collection.json`) would be of help in testing this version.
 
 This are still under development to meet up with up with the version 1.0
-* Routes to have function based on the role only
-* Test validation on models well
+* During update, the object with values should not be over-written by null
 * Use bcrypt to encrypt the password before saving

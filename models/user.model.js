@@ -167,12 +167,12 @@ const UserSchema = new mongoose.Schema({
     courses: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "Courses",
-        // validate: {
-        //     validator: (value) => {
-        //         return /^[a-f/d]{24}$/.test(value)
-        //     },
-        //     message: problem => `${problem.value} is not a valid ObjectId`
-        // }
+        validate: {
+            validator: (value) => {
+                return /^[a-f\d]{24}$/.test(value)
+            },
+            message: problem => `${problem.value} is not a valid ObjectId`
+        }
     },
     password: {
         type: String,
