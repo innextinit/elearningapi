@@ -4,23 +4,29 @@ const Article = require("../models/article.model")
 const Question = require("../models/question.model")
 const Delete = require("../delete/deleted.user.model")
 const auth = require("../middlewares/auth.middleware")
-const validate = require("../middlewares/validate.middleware")
 const bcrypt = require("bcrypt");
-const { application } = require("express");
-const { model } = require("../models/course.model")
-
 
 // user
-module.exports.newUser = (user, callback) => {
-    User.create(newUser, (err, newUser) => {
-        if (err) {
-            console.log(`${err} from create user`)
-            return err
-        } else {
+module.exports.newUser = async (user, callback) => {
+    try {
+        let hash = await bcrypt.hash(user.password, 15)
+        user.password = hash
+        newUser = new User(
+            user
+        )
+        newUser.save(callback)
+    } catch (error) {
+        return error
+    }
+}
 
-            newUser.save(callback)
-        }
-    })
+module.exports.login = async (login, callback) => {
+    try {
+        console.log(login)
+        // bcrypt.compare(login.password, foundUser.password, callback)
+    } catch (error) {
+        return error
+    }
 }
 
 module.exports.userUpdate = (user, callback) => {
@@ -72,9 +78,8 @@ module.exports.delUser = (user, callback) => {
 }
 
 // course
-module.exports.courses = (course, callback) => {
-    const newCourse = new Course(course)
-    newCourse.save(callback)
+module.exports.courses = (callback) => {
+    Course.find({}, callback)
 }
 
 // article
@@ -92,6 +97,7 @@ module.exports.getCourseQuestion = (question, callback) => {
     )
 }
 
+// not working yet
 module.exports.checkAns = (question, callback) => {
     Question.findById(
         question.id,

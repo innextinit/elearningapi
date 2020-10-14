@@ -83,7 +83,7 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         validate: {
             validator: (value) => {
-                return /^([/d-]{5,10})$/.test(value)
+                return /^([\d-]{5,10})$/.test(value)
             },
             message: problem => `${problem.value} is not valid`
         }

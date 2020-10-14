@@ -23,6 +23,7 @@ $ node app.js
 Method          | Route                     | Description
 ===================
     POST    | {{baseURL}}                     | firstName, lastName, email, password are required
+    POST    | {{baseURL}}/login               | email, password required
     GET     | {{baseURL}}                     | this returns all users details or one with the query params
     PUT     | {{baseURL}}/:id                 | this takes data to be edited with userID
     DELETE  | {{baseURL}}/:id                 | this takes the userID to be deleted
@@ -59,4 +60,6 @@ Since version 1.0 is for testing endpoints only, `no authentication nor authoriz
 
 This are still under development to meet up with up with the version 1.0
 * During update, the object with values should not be over-written by null
-* Use bcrypt to encrypt the password before saving
+* Validator to stop picking the previous data + incoming data for validation
+* Login route
+* Check answer

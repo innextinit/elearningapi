@@ -1,8 +1,5 @@
 const express = require("express")
 const router = express.Router()
-const bcrypt = require("bcrypt")
-
-const Course = require("../models/course.model")
 const middlewares = require("../middlewares/user.middleware")
 const auth = require("../middlewares/auth.middleware")
 
@@ -12,10 +9,26 @@ router.post("/", (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        courses: req.body.courses
     }
 
     middlewares.newUser(user, (err, data) => {
+        if (err) {
+            res.json({"error": err});
+        } else {
+            res.json(data);
+        }
+    })
+})
+
+router.post("/login", (req, res) => {
+    const login = {
+        email: req.body.email,
+        password: req.body.password
+    }
+
+    middlewares.login(login, (err, data) => {
         if (err) {
             res.json({"error": err});
         } else {
@@ -67,7 +80,7 @@ router.delete("/:id", (req, res) => {
 
 // courses
 router.get("/courses", (req, res) => {
-    Course.find({}, (err, course) => {
+    middlewares.courses((err, course) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -137,7 +150,7 @@ router.post("/question/:id", (req, res) => {
 // application
 router.post("/application", (req, res) => {
     const application = {
-        course_id: req.body.course_id,
+        appID: req.body.appID,
         //_id: req.user._id,
         _id: req.body._id
     }

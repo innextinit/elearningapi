@@ -1,8 +1,10 @@
+const bcrypt = require("bcrypt")
 const User = require("../models/user.model")
 const Course = require("../models/course.model")
 const Article = require("../models/article.model")
 const Question = require("../models/question.model")
 const Delete = require("../delete/deleted.user.model")
+
 
 // user
 module.exports.user = (callback) => {
@@ -14,14 +16,16 @@ module.exports.findUser = (userEmail, callback) => {
 }
 
 module.exports.newUser = async (user, callback) => {
-    User.create(user, (err, newUser) => {
-        if (err) {
-            console.log(`${err} from create user`)
-            return err
-        } else {
-            newUser.save(callback)
-        }
-    })
+    try {
+        let hash = await bcrypt.hash(user.password, 15)
+        user.password = hash
+        newUser = new User(
+            user
+        )
+        newUser.save(callback)
+    } catch (error) {
+        return error
+    }
 }
 
 module.exports.userUpdate = (user, callback) => {
