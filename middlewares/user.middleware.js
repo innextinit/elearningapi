@@ -3,7 +3,8 @@ const Course = require("../models/course.model")
 const Article = require("../models/article.model")
 const Question = require("../models/question.model")
 const Delete = require("../delete/deleted.user.model")
-const auth = require("../middlewares/auth.middleware")
+
+const passport = require("passport")
 const bcrypt = require("bcrypt");
 
 // user
@@ -21,12 +22,33 @@ module.exports.newUser = async (user, callback) => {
 }
 
 module.exports.login = async (login, callback) => {
-    try {
-        console.log(login)
-        // bcrypt.compare(login.password, foundUser.password, callback)
-    } catch (error) {
-        return error
-    }
+    // const user = await User.findOne({"email": login.email})
+    // if (!user) {
+    //     console.log("no user found")
+    // } else {
+    //     console.log(user)
+    // }
+
+    // const validPW = await bcrypt.compare(login.password, user.password)
+    // if (!validPW) {
+    //     console.log("incorrect password")
+    // } else {
+    //     console.log(validPW)
+    // }
+
+
+    passport.use(new LocalStrategy(
+        (email, password, done) => {
+          User.findOne({ email: email }, (err, user) => {
+            console.log(user)
+            if (err) { return done(err); }
+            if (!user) { return done(null, false); }
+            if (!user.verifyPassword(password)) { return done(null, false); }
+            return done(null, user);
+          });
+        }
+      ));
+    
 }
 
 module.exports.userUpdate = (user, callback) => {

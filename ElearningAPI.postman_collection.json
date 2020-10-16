@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "ae61e1ef-5be7-45f4-90ec-c620d3bcddc0",
-		"name": "API Elearning",
+		"name": "ElearningAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -18,7 +18,8 @@
 							"host": [
 								"{{adminURL}}"
 							]
-						}
+						},
+						"description": "This gets all USERS"
 					},
 					"response": []
 				},
@@ -28,7 +29,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{adminURL}}/query?email=test@test.com",
+							"raw": "{{adminURL}}/query?email=user1@user.com",
 							"host": [
 								"{{adminURL}}"
 							],
@@ -38,11 +39,12 @@
 							"query": [
 								{
 									"key": "email",
-									"value": "test@test.com",
+									"value": "user1@user.com",
 									"description": "user query"
 								}
 							]
-						}
+						},
+						"description": "Gets a user with the email query given"
 					},
 					"response": []
 				},
@@ -56,22 +58,17 @@
 							"urlencoded": [
 								{
 									"key": "firstName",
-									"value": "cs",
+									"value": "user",
 									"type": "text"
 								},
 								{
 									"key": "lastName",
-									"value": "cs",
+									"value": "user",
 									"type": "text"
 								},
 								{
-									"key": "email",
-									"value": "cscs@css.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "passwordIs12ChaLong",
+									"key": "otherName",
+									"value": "other",
 									"type": "text"
 								},
 								{
@@ -80,14 +77,65 @@
 									"type": "text"
 								},
 								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "2348142378556",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "user@user.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pa$$W0Rd4Us3r",
+									"type": "text"
+								},
+								{
 									"key": "role",
-									"value": "cs",
+									"value": "user",
 									"type": "text"
 								},
 								{
 									"key": "courses",
 									"value": "5f7aacca8be6d50590ad40aa",
 									"type": "text"
+								},
+								{
+									"key": "zipcode",
+									"value": "1452458",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "akure",
+									"type": "text"
+								},
+								{
+									"key": "streetName",
+									"value": "ASFFUTA",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Nigeria",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "Ondo",
+									"type": "text"
+								},
+								{
+									"key": "DP",
+									"value": "file type",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -96,7 +144,8 @@
 							"host": [
 								"{{adminURL}}"
 							]
-						}
+						},
+						"description": "To create a new user firstName, lastName, email, password and a course (hard-coded) for the know how of the API"
 					},
 					"response": []
 				},
@@ -165,7 +214,8 @@
 									"value": "5f844b59100530375829afe1"
 								}
 							]
-						}
+						},
+						"description": "Takes userID to update with the details to update"
 					},
 					"response": []
 				},
@@ -193,7 +243,8 @@
 									"value": "5f844b59100530375829afe1"
 								}
 							]
-						}
+						},
+						"description": "Takes the userID to delete"
 					},
 					"response": []
 				},
@@ -217,7 +268,8 @@
 							"path": [
 								"courses"
 							]
-						}
+						},
+						"description": "Gets all courses avavailable"
 					},
 					"response": []
 				},
@@ -248,7 +300,8 @@
 									"value": "Welcome to NodeJS"
 								}
 							]
-						}
+						},
+						"description": "Gets a course with the title query given"
 					},
 					"response": []
 				},
@@ -339,7 +392,8 @@
 									"description": "courseID"
 								}
 							]
-						}
+						},
+						"description": "Takes courseID to update with the details"
 					},
 					"response": []
 				},
@@ -368,7 +422,8 @@
 									"description": "course id"
 								}
 							]
-						}
+						},
+						"description": "Takes the courseID and deletes all article and question with that courseID and then the course itself"
 					},
 					"response": []
 				},
@@ -395,7 +450,8 @@
 									"description": "courseID"
 								}
 							]
-						}
+						},
+						"description": "Gets all article with the courseID"
 					},
 					"response": []
 				},
@@ -440,7 +496,8 @@
 									"description": "articleID"
 								}
 							]
-						}
+						},
+						"description": "Takes the articleID to update with the data"
 					},
 					"response": []
 				},
@@ -469,7 +526,8 @@
 									"description": "article id"
 								}
 							]
-						}
+						},
+						"description": "Deletes the article with the ID given"
 					},
 					"response": []
 				},
@@ -502,7 +560,8 @@
 									"description": "course id"
 								}
 							]
-						}
+						},
+						"description": "Gets all question with the courseID"
 					},
 					"response": []
 				},
@@ -562,7 +621,8 @@
 									"description": "questonID"
 								}
 							]
-						}
+						},
+						"description": "takes the questionID and the data to update"
 					},
 					"response": []
 				},
@@ -573,7 +633,10 @@
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": []
+							"urlencoded": [],
+							"options": {
+								"urlencoded": {}
+							}
 						},
 						"url": {
 							"raw": "{{adminURL}}/question/:idQ",
@@ -586,12 +649,14 @@
 							],
 							"variable": [
 								{
+									"description": "questonID",
 									"key": "idQ",
-									"value": "5f860be8ba37123408d7124e",
-									"description": "questonID"
+									"type": "string",
+									"value": "5f860be8ba37123408d7124e"
 								}
 							]
-						}
+						},
+						"description": "deletes the question with the ID given"
 					},
 					"response": []
 				}
@@ -620,7 +685,8 @@
 									"value": "cscs@css.com"
 								}
 							]
-						}
+						},
+						"description": "search for a user with the email given"
 					},
 					"response": []
 				},
@@ -658,7 +724,8 @@
 									"value": "5f860b5dba37123408d7124b"
 								}
 							]
-						}
+						},
+						"description": "Takes the userID of the user found to update the hasActivated, and isDisable part of that user."
 					},
 					"response": []
 				},
@@ -688,7 +755,8 @@
 									"value": "Welcome to NodeJS"
 								}
 							]
-						}
+						},
+						"description": "Get a course with the query title"
 					},
 					"response": []
 				},
@@ -774,7 +842,8 @@
 									"value": "5f8470f464702e1630d05640"
 								}
 							]
-						}
+						},
+						"description": "Takes the courseID with the details like isPrivate, statusLabel among others"
 					},
 					"response": []
 				},
@@ -794,6 +863,14 @@
 								"article",
 								""
 							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f8470f464702e1630d05640",
+									"description": "courseID",
+									"disabled": true
+								}
+							],
 							"variable": [
 								{
 									"key": "id",
@@ -801,7 +878,8 @@
 									"description": "courseID"
 								}
 							]
-						}
+						},
+						"description": "Gets all articles with courseID"
 					},
 					"response": []
 				},
@@ -834,7 +912,8 @@
 									"description": "course id"
 								}
 							]
-						}
+						},
+						"description": "Gets all question with courseID"
 					},
 					"response": []
 				},
@@ -870,7 +949,8 @@
 									"description": "userID"
 								}
 							]
-						}
+						},
+						"description": "Takes the courseID to remove from the user"
 					},
 					"response": []
 				}
@@ -906,7 +986,8 @@
 							"path": [
 								""
 							]
-						}
+						},
+						"description": "Gets all user having the course in their application"
 					},
 					"response": []
 				},
@@ -937,7 +1018,8 @@
 								"courses",
 								""
 							]
-						}
+						},
+						"description": "Gets all courses with the tutorID"
 					},
 					"response": []
 				},
@@ -951,7 +1033,7 @@
 							"urlencoded": [
 								{
 									"key": "title",
-									"value": "Welcome to NodeJS",
+									"value": "MongoDB",
 									"type": "text"
 								},
 								{
@@ -998,26 +1080,22 @@
 								{
 									"key": "isPrivate",
 									"value": "true",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "priceCurrency",
 									"value": "USD",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "primaryCategory",
 									"value": "programming",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "subCategory",
 									"value": "MongoDB",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								}
 							]
 						},
@@ -1030,7 +1108,8 @@
 								"courses",
 								""
 							]
-						}
+						},
+						"description": "Create a new course with the details needed"
 					},
 					"response": []
 				},
@@ -1130,7 +1209,8 @@
 									"description": "courseID"
 								}
 							]
-						}
+						},
+						"description": "Takes the courseID for the course to update with the data"
 					},
 					"response": []
 				},
@@ -1155,11 +1235,12 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f848b9ff380860f8c50ac65",
+									"value": "5f8470f464702e1630d05640",
 									"description": "course id"
 								}
 							]
-						}
+						},
+						"description": "Deletes all articles and questions with the courseID then the course itself"
 					},
 					"response": []
 				},
@@ -1173,7 +1254,7 @@
 							"urlencoded": [
 								{
 									"key": "section",
-									"value": "1",
+									"value": "2",
 									"type": "text"
 								},
 								{
@@ -1183,7 +1264,7 @@
 								},
 								{
 									"key": "title",
-									"value": "Introduction",
+									"value": "MongoDB Alat",
 									"type": "text"
 								},
 								{
@@ -1206,11 +1287,12 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f8470f464702e1630d05640",
+									"value": "5f87328cc687172294579cf2",
 									"description": "courseID"
 								}
 							]
-						}
+						},
+						"description": "creates a new article for the course with the courseID"
 					},
 					"response": []
 				},
@@ -1237,7 +1319,8 @@
 									"description": "courseID"
 								}
 							]
-						}
+						},
+						"description": "Gets all articles with the courseID"
 					},
 					"response": []
 				},
@@ -1282,7 +1365,8 @@
 									"description": "articleID"
 								}
 							]
-						}
+						},
+						"description": "takes articleID with the data to update"
 					},
 					"response": []
 				},
@@ -1311,7 +1395,8 @@
 									"description": "article id"
 								}
 							]
-						}
+						},
+						"description": "takes the articleID to delete"
 					},
 					"response": []
 				},
@@ -1325,7 +1410,7 @@
 							"urlencoded": [
 								{
 									"key": "question",
-									"value": "question 2",
+									"value": "two",
 									"type": "text"
 								},
 								{
@@ -1373,11 +1458,12 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f8470f464702e1630d05640",
+									"value": "5f87328cc687172294579cf2",
 									"description": "courseID"
 								}
 							]
-						}
+						},
+						"description": "takes courseID to create the question for"
 					},
 					"response": []
 				},
@@ -1410,7 +1496,8 @@
 									"description": "courseID"
 								}
 							]
-						}
+						},
+						"description": "gets all question with the courseID"
 					},
 					"response": []
 				},
@@ -1475,7 +1562,8 @@
 									"description": "questonID"
 								}
 							]
-						}
+						},
+						"description": "takes questionID to update with the data to update"
 					},
 					"response": []
 				},
@@ -1504,7 +1592,8 @@
 									"description": "questonID"
 								}
 							]
-						}
+						},
+						"description": "takes questionID to delete"
 					},
 					"response": []
 				}
@@ -1534,17 +1623,17 @@
 								},
 								{
 									"key": "email",
-									"value": "test@test.com",
+									"value": "user1@user.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "passwordIs12ChaLong",
+									"value": "Pa$$W0Rd4Us3r",
 									"type": "text"
 								},
 								{
-									"key": "title",
-									"value": "Prof",
+									"key": "courses",
+									"value": "5f7aacca8be6d50590ad40aa",
 									"type": "text"
 								}
 							]
@@ -1554,7 +1643,41 @@
 							"host": [
 								"{{userURL}}"
 							]
-						}
+						},
+						"description": "Signup form for new user. The form takes firstName, lastName, email, password along with a hard-coded course (how to use this API.)"
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "user1@user.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pa$$W0Rd4Us3r",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{userURL}}/login",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "Login form. This takes email and password"
 					},
 					"response": []
 				},
@@ -1577,22 +1700,54 @@
 									"type": "text"
 								},
 								{
-									"key": "email",
-									"value": "test@test.com",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "password",
-									"value": "passwordIs12ChaLong",
-									"type": "text",
-									"disabled": true
+									"key": "otherName",
+									"value": "other",
+									"type": "text"
 								},
 								{
 									"key": "title",
-									"value": "Prof",
-									"type": "text",
-									"disabled": true
+									"value": "Mr",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "user1@user.com",
+									"type": "text"
+								},
+								{
+									"key": "zipcode",
+									"value": "4578541",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Akure",
+									"type": "text"
+								},
+								{
+									"key": "streetName",
+									"value": "FUTA",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Nigeria",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "Ondo",
+									"type": "text"
+								},
+								{
+									"key": "DP",
+									"value": "fileType",
+									"type": "text"
 								}
 							]
 						},
@@ -1608,10 +1763,11 @@
 								{
 									"description": "userID",
 									"key": "id",
-									"value": "5f7c87510515ea2808fa3d77"
+									"value": "5f872721c0771a2d0474df97"
 								}
 							]
-						}
+						},
+						"description": "After login, the user may want to include other information about themself including otherName, gender, title and address details"
 					},
 					"response": []
 				},
@@ -1669,6 +1825,40 @@
 					"response": []
 				},
 				{
+					"name": "application",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "appID",
+									"value": "5f85914a1e563c2a54ce969f",
+									"description": "appID",
+									"type": "text"
+								},
+								{
+									"key": "_id",
+									"value": "5f872a372e4f882f089695f7",
+									"description": "userID",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{userURL}}/application",
+							"host": [
+								"{{userURL}}"
+							],
+							"path": [
+								"application"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "article",
 					"request": {
 						"method": "GET",
@@ -1687,7 +1877,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f7aacca8be6d50590ad40aa",
+									"value": "5f87328cc687172294579cf2",
 									"description": "courseID"
 								}
 							]
@@ -1720,7 +1910,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f7aacca8be6d50590ad40aa",
+									"value": "5f87328cc687172294579cf2",
 									"description": "course id"
 								}
 							]
@@ -1755,43 +1945,9 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f7aae1f8be6d50590ad40ae",
+									"value": "5f8732eac687172294579cf5",
 									"description": "questionID"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "application",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "course_id",
-									"value": "5f7aacca8be6d50590ad40aa",
-									"description": "appID",
-									"type": "text"
-								},
-								{
-									"key": "_id",
-									"value": "5f7aacb38be6d50590ad40a9",
-									"description": "userID",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{userURL}}/application",
-							"host": [
-								"{{userURL}}"
-							],
-							"path": [
-								"application"
 							]
 						}
 					},
@@ -1807,8 +1963,8 @@
 							"urlencoded": [
 								{
 									"key": "appID",
-									"value": "5f8470f464702e1630d05640",
-									"description": "courseID",
+									"value": "5f7aacca8be6d50590ad40aa",
+									"description": "appID",
 									"type": "text"
 								}
 							]
@@ -1825,7 +1981,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f844847beb78115d4471c13",
+									"value": "5f872a372e4f882f089695f7",
 									"description": "userID"
 								}
 							]

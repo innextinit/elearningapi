@@ -56,7 +56,7 @@ The `{{baseURL}}` changes depending on the role of the user of this API. Here ar
 
 The version 1.0 is mainly to test all endpoint to see they carryout what they should. In this version we have four roles and they are admin with the route `{{adminURL}} or localhost:2020/admin,` the customer services with `{{csURL}} or localhost:2020/cs,` the tutor with `{{tutorURL}} or localhost:2020/tutor` and the user or student with `{{userURL}} or localhost:2020/.`
 
-Since version 1.0 is for testing endpoints only, `no authentication nor authorization` is put in place yet. The [API Elearning.postman_collection.json](`./API_Elearning.postman_collection.json`) would be of help in testing this version.
+Since version 1.0 is for testing endpoints only, `no authentication nor authorization` is put in place yet. The [ElearningAPI.postman_collection.json](`./ElearningAPI.postman_collection.json`) would be of help in testing this version.
 
 This are still under development to meet up with up with the version 1.0
 * During update, the object with values should not be over-written by null
