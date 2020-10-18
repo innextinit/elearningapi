@@ -34,10 +34,6 @@ router.post("/login", (req, res) => {
             res.json(data);
         }
     })
-
-    // passport.authenticate('local', { failureRedirect: '/login' }),
-    // (req, res) => {
-    // res.redirect('/');
 })
 
 router.put("/:id", (req, res) => {

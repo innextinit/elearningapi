@@ -3,7 +3,6 @@ dotenv.config()
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
-const passport = require("passport")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const expressSession = require("express-session")
@@ -34,8 +33,6 @@ app.use(expressSession({
   saveUninitialized: true,
   cookie: {maxAge: 60 * 12 * 1000} //12 mins
 }))
-app.use(passport.initialize())
-app.use(passport.session())
 
 // header
 app.use((req, res, next) => {
