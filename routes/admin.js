@@ -1,10 +1,10 @@
 const express = require("express")
 const router = express.Router()
-const middlewares = require("../middlewares/index.middleware")
+const controller = require("../controller/index.controller")
 
 // courses
 router.get("/courses", (req, res) => {
-    middlewares.course((err, data) => {
+    controller.course((err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -15,7 +15,7 @@ router.get("/courses", (req, res) => {
 
 // user
 router.get("/", (req, res) => {
-    middlewares.user((err, user) => {
+    controller.user((err, user) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -44,7 +44,7 @@ router.post("/", (req, res) => {
         courses: req.body.courses
     }
 
-    middlewares.newUser(user, (err, data) => {
+    controller.newUser(user, (err, data) => {
         if (err) {
             res.json({"error": err});
         } else {
@@ -53,13 +53,27 @@ router.post("/", (req, res) => {
     })
 })
 
-// query
+router.post("/login", (req, res) => {
+    const login = {
+        email: req.body.email,
+        password: req.body.password
+    }
+
+    controller.login(login, (err, data) => {
+        if (err) {
+            res.json({"error": err});
+        } else {
+            res.json(data);
+        }
+    })
+})
+
 router.get("/query", (req, res) => {
     const userEmail = {
         email: req.query.email
     }
 
-    middlewares.findUser(userEmail, (err, data) => {
+    controller.findUser(userEmail, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -89,7 +103,7 @@ router.put("/:id", (req, res) => {
         courses: req.body.courses
     }
 
-    middlewares.userUpdate(user, (err, data) => {
+    controller.userUpdate(user, (err, data) => {
         if (err) {
             res.json({"error": err});
         } else {
@@ -103,7 +117,7 @@ router.delete("/:id", (req, res) => {
         id: req.params.id
     }
 
-    middlewares.delUser(user, (err, data) => {
+    controller.delUser(user, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -118,7 +132,7 @@ router.get("/courses/query", (req, res) => {
         title: req.query.title
     }
 
-    middlewares.findCourse(courseTitle, (err, data) => {
+    controller.findCourse(courseTitle, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -148,7 +162,7 @@ router.put("/courses/:id", (req, res) => {
         statusLabel: req.body.statusLabel
     }
 
-    middlewares.courseUpdate(course, (err, data) => {
+    controller.courseUpdate(course, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -162,7 +176,7 @@ router.delete("/courses/:id", (req, res) => {
         id: req.params.id
     }
 
-    middlewares.delCourse(course, (err, data) => {
+    controller.delCourse(course, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -180,7 +194,7 @@ router.put("/article/:idA", (req, res) => {
         body: req.body.body
     }
 
-    middlewares.articleUpdate(article, (err, data) => {
+    controller.articleUpdate(article, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -194,7 +208,7 @@ router.delete("/article/:idA", (req, res) => {
         idA: req.params.idA
     }
 
-    middlewares.delArticle(article, (err, data) => {
+    controller.delArticle(article, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -208,7 +222,7 @@ router.get("/courses/:id/article", (req, res) => {
         courseID: req.params.id
     }
 
-    middlewares.getCourseArticle(article, (err, data) => {
+    controller.getCourseArticle(article, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -231,7 +245,7 @@ router.put("/question/:idQ", (req, res) => {
         tutor: req.body.tutor
     }
 
-    middlewares.questionUpdate(question, (err, data) => {
+    controller.questionUpdate(question, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -245,7 +259,7 @@ router.delete("/question/:idQ", (req, res) => {
         idQ: req.params.idQ
     }
 
-    middlewares.delQuestion(question, (err, data) => {
+    controller.delQuestion(question, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -259,7 +273,7 @@ router.get("/courses/:id/question", (req, res) => {
         courseID: req.params.id
     }
 
-    middlewares.getCourseQuestion(question, (err, data) => {
+    controller.getCourseQuestion(question, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {

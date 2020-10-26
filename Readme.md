@@ -20,31 +20,27 @@ $ npm install
 $ node app.js
 ```
 
-Method          | Route                     | Description
-===================
-    POST    | {{baseURL}}                     | firstName, lastName, email, password are required
-    POST    | {{baseURL}}/login               | email, password required
-    GET     | {{baseURL}}                     | this returns all users details or one with the query params
-    PUT     | {{baseURL}}/:id                 | this takes data to be edited with userID
-    DELETE  | {{baseURL}}/:id                 | this takes the userID to be deleted
-
-    POST    | {{baseURL}}/courses/            | title, description, durationPerQuestion, totalQuestion, headline, price are required
-    GET     | {{baseURL}}/courses/            | this returns all courses or one with the query params
-    PUT     | {{baseURL}}/courses/:id         | this takes data to be edited with courseID
-    DELETE  | {{baseURL}}/courses/:id         | this takes the courseID to be deleted
-
-    POST    | {{baseURL}}/courses/:id/article | title, body, section are required with courseID
-    GET     | {{baseURL}}/courses/:id/article | this returns article with the courseID
-    PUT     | {{baseURL}}/article/:idA        | this takes data to be edited with articleID
-    DELETE  | {{baseURL}}/article/:idA        | this takes the articleID to be deleted
-
-    POST    | {{baseURL}}/courses/:id/question| question, option1 - option4, correctAnswer, courseID are required
-    GET     | {{baseURL}}/courses/:id/question| this returns question with the courseID
-    PUT     | {{baseURL}}/question/:idQ       | this takes data to be edited with questionID
-    DELETE  | {{baseURL}}/question/:idQ       | this takes the questionID to be deleted
-
-    POST    | {{baseURL}}/application         | this takes the courseID the user wants to register for
-    DELETE  | {{baseURL}}/application/:id     | this takes the courseID to be removed from user
+Method | Route | Description
+-----------|-------------|------------
+POST    | {{baseURL}}                       | firstName, lastName, email, password are required
+POST    | {{baseURL}}/login                 | email, password required
+GET     | {{baseURL}}                       | this returns all users details or one with the query params
+PUT     | {{baseURL}}/:id                   | this takes data to be edited with userID
+DELETE  | {{baseURL}}/:id                   | this takes the userID to be deleted
+POST    | {{baseURL}}/courses/              | title, description, durationPerQuestion, totalQuestion, headline, price are required
+GET     | {{baseURL}}/courses/              | this returns all courses or one with the query params
+PUT     | {{baseURL}}/courses/:id           | this takes data to be edited with courseID
+DELETE  | {{baseURL}}/courses/:id           | this takes the courseID to be deleted
+POST    | {{baseURL}}/courses/:id/article   | title, body, section are required with courseID
+GET     | {{baseURL}}/courses/:id/article   | this returns article with the courseID
+PUT     | {{baseURL}}/article/:idA          | this takes data to be edited with articleID
+DELETE  | {{baseURL}}/article/:idA          | this takes the articleID to be deleted
+POST    | {{baseURL}}/courses/:id/question  | question, option1 - option4, correctAnswer, courseID are required
+GET     | {{baseURL}}/courses/:id/question  | this returns question with the courseID
+PUT     | {{baseURL}}/question/:idQ         | this takes data to be edited with questionID
+DELETE  | {{baseURL}}/question/:idQ         | this takes the questionID to be deleted
+POST    | {{baseURL}}/application           | this takes the courseID the user wants to register for
+DELETE  | {{baseURL}}/application/:id       | this takes the courseID to be removed from user
 
 ## Futher Explaination
 

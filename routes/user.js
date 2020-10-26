@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
-const middlewares = require("../middlewares/user.middleware")
+const controller = require("../controller/user.controller")
+const auth = require("../auth/auth.middleware")
 
 // user
 router.post("/", (req, res) => {
@@ -9,10 +10,10 @@ router.post("/", (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
-        courses: req.body.courses
+        courses: process.env.course
     }
 
-    middlewares.newUser(user, (err, data) => {
+    controller.newUser(user, (err, data) => {
         if (err) {
             res.json({"error": err});
         } else {
@@ -27,7 +28,7 @@ router.post("/login", (req, res) => {
         password: req.body.password
     }
 
-    middlewares.login(login, (err, data) => {
+    controller.login(login, (err, data) => {
         if (err) {
             res.json({"error": err});
         } else {
@@ -54,7 +55,7 @@ router.put("/:id", (req, res) => {
         DP: req.body.DP
     }
 
-    middlewares.userUpdate(user, (err, data) => {
+    controller.userUpdate(user, (err, data) => {
         if (err) {
             res.json({"error": err});
         } else {
@@ -68,7 +69,7 @@ router.delete("/:id", (req, res) => {
         id: req.params.id
     }
 
-    middlewares.delUser(user, (err, data) => {
+    controller.delUser(user, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -79,7 +80,7 @@ router.delete("/:id", (req, res) => {
 
 // courses
 router.get("/courses", (req, res) => {
-    middlewares.courses((err, course) => {
+    controller.courses((err, course) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -94,7 +95,7 @@ router.get("/courses/:id/article", (req, res) => {
         courseID: req.params.id
     }
 
-    middlewares.getCourseArticle(article, (err, data) => {
+    controller.getCourseArticle(article, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -109,7 +110,7 @@ router.get("/courses/:id/question", (req, res) => {
         courseID: req.params.id
     }
 
-    middlewares.getCourseQuestion(question, (err, data) => {
+    controller.getCourseQuestion(question, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -125,7 +126,7 @@ router.post("/question/:id", (req, res) => {
         optionPicked: req.body.optionPicked
     }
 
-    middlewares.checkAns(question, (err, data) => {
+    controller.checkAns(question, (err, data) => {
         if (err) {
             res.json({"error": err})
         } else {
@@ -154,7 +155,7 @@ router.post("/application", (req, res) => {
         _id: req.body._id
     }
 
-    middlewares.newApplication(application, (err, newApplication) => {
+    controller.newApplication(application, (err, newApplication) => {
         if (err) {
             res.json({"errror": err});
         } else {
@@ -170,7 +171,7 @@ router.delete("/application/:id", (req, res) => {
         appID: req.body.appID
     }
 
-    middlewares.delApplication(application, (err, data) => {
+    controller.delApplication(application, (err, data) => {
         if (err) {
             res.json({"errror": err});
         } else {
