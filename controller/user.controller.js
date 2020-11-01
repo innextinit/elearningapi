@@ -4,72 +4,129 @@ const Article = require("../models/article.model")
 const Question = require("../models/question.model")
 const Delete = require("../delete/deleted.user.model")
 
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs")
+const auth = require("../middleware/auth.middleware")
 
 // user
-exports.newUser = async (user, callback) => {
+exports.newUser = async (req, res, next) => {
+    let { firstName, lastName, password, email, courses } = req.body
+
     try {
-        let hash = await bcrypt.hash(user.password, 15)
-        user.password = hash
-        newUser = new User(
-            user
-        )
-        newUser.save(callback)
+        if (!firstName || !lastName || !email || !password || !courses) {
+          const err = new Error()
+          err.name = "Bad Request"
+          err.status = 400
+          err.message = "Please fill all details"
+          throw err
+        }
+
+        const foundUser = await User.findOne({"email": email})
+
+        if (foundUser) {
+            const err = new Error()
+            err.name = "Not Acceptable"
+            err.status = 406
+            err.message = "This user already exit"
+            throw err
+        }
+
+        nP = await bcrypt.hash(password, 15)
+        password = nP
+        const createUser = 
+        ({
+            firstName,
+            lastName,
+            password,
+            email,
+            courses
+        })
+        const user = await new User( createUser )
+        user.save()
+
+        const userJson = auth.authJSON(user)
+        res.status(201).json({
+            success: true,
+            status: 201,
+            message: "User created successfully",
+            user: userJson
+        })
+
     } catch (error) {
-        return error
+        next(error)
     }
 }
 
-exports.login = async (login, callback) => {
-    const user = await User.findOne({"email": login.email})
-    if (!user) {
-        console.log("no user found")
-    } else {
-        console.log(user)
-    }
+exports.login = async (req, res, next) => {
+    const { email, password } = req.body
+  
+    try {
+      if (!email || !password) {
+        const err = new Error()
+        err.name = "Bad Request"
+        err.status = 400
+        err.message = "Please input all details"
+        throw err
+      }
 
-    const validPW = await bcrypt.compare(login.password, user.password)
-    if (!validPW) {
-        console.log("incorrect password")
-    } else {
-        console.log(validPW)
+      const user = await User.findOne({"email": email})
+      
+      if (!user) {
+        const err = new Error()
+        err.name = "Authentication Error"
+        err.status = 401
+        err.message = "This user doesn't exist"
+        throw err
+      }
+      
+      const userPW = await user.password
+      const isMatch = await auth.compareHash(password, userPW)
+      
+      if (!isMatch) {
+        const err = new Error()
+        err.name = "Authentication Error"
+        err.status = 401
+        err.message = "Passowrd Incorrect"
+        throw err
+      }
+      
+      const userJson = auth.authJSON(user)
+      res.json({
+        success: true,
+        user: userJson
+      })
+
+    } catch (error) {
+      next(error);
     }
 }
 
-exports.userUpdate = (user, callback) => {
-    User.findByIdAndUpdate(
-        user.id,
-        {
-            "firstName": user.firstName,
-            "lastName": user.lastName,
-            "otherName": user.otherName,
-            "title": user.title,
-            "gender": user.gender,
-            "phone": user.phone,
-            "email": user.email,
-            "zipcode": user.zipcode,
-            "city": user.city,
-            "streetName": user.streetName,
-            "country": user.country,
-            "state": user.state,
-            "DP": user.DP
-        },
-        {new: true, upsert: true},
-        callback
-    )
+
+exports.userUpdate = (req, res, next) => {
+    const { firstName, lastName, otherName, password, title, gender, phone, email, zipcode, city, streetName, country, state } = req.body
+    const { id } = req.params
+    const { DP } = req.files
+
+    try {
+        if (!firstName || !lastName || !email || !password) {
+          const err = new Error()
+          err.name = ""  
+        }
+    } catch (error) {
+        
+    }
 }
 
-exports.delUser = (user, callback) => {
+exports.delUser = (req, res, next) => {
+    const user = req.user
     User.findById(
-        user.id,
+        user._id,
        async (err, foundUser) => {
             if (err) {
-                return err
+                res.json({"err": err})
             } else {
                  const delUser = {
                     deleteUser: foundUser.toJSON()
                 }
-                console.log(`from convert .toJSON : \n ${delUser}`)
                await Delete.create(delUser, (err, newDelUser) => {
                     if (err) {
                         return err
@@ -78,7 +135,8 @@ exports.delUser = (user, callback) => {
                         newDelUser.save()
                     }
                 })
-               await User.findByIdAndDelete(user.id, callback)
+               const del = await User.findByIdAndDelete(user._id)
+               res.json(del)
             }
         }
     )

@@ -1,82 +1,44 @@
 const express = require("express")
 const router = express.Router()
 const controller = require("../controller/user.controller")
-const auth = require("../auth/auth.middleware")
+
+const auth = require("../middleware/auth.middleware")
 
 // user
-router.post("/", (req, res) => {
-    const user = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        courses: process.env.course
-    }
+router.post("/", controller.newUser)
 
-    controller.newUser(user, (err, data) => {
-        if (err) {
-            res.json({"error": err});
-        } else {
-            res.json(data);
-        }
-    })
+router.post("/login", controller.login)
+
+router.put("/:id", auth.decodeToken, (req, res) => {
+    // const user = {
+    //     id: req.params.id,
+    //     firstName: req.body.firstName,
+    //     lastName: req.body.lastName,
+    //     otherName: req.body.otherName,
+    //     title: req.body.title,
+    //     gender: req.body.gender,
+    //     phone: req.body.phone,
+    //     email: req.body.email,
+    //     zipcode: req.body.zipcode,
+    //     city: req.body.city,
+    //     streetName: req.body.streetName,
+    //     country: req.body.country,
+    //     state: req.body.state,
+    //     DP: req.body.DP
+    // }
+
+    // controller.userUpdate(user, (err, data) => {
+    //     if (err) {
+    //         res.json({"error": err});
+    //     } else {
+    //         res.json(data);
+    //     }
+    // })
+
+    console.log("welcome man you make it")
 })
 
-router.post("/login", (req, res) => {
-    const login = {
-        email: req.body.email,
-        password: req.body.password
-    }
-
-    controller.login(login, (err, data) => {
-        if (err) {
-            res.json({"error": err});
-        } else {
-            res.json(data);
-        }
-    })
-})
-
-router.put("/:id", (req, res) => {
-    const user = {
-        id: req.params.id,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        otherName: req.body.otherName,
-        title: req.body.title,
-        gender: req.body.gender,
-        phone: req.body.phone,
-        email: req.body.email,
-        zipcode: req.body.zipcode,
-        city: req.body.city,
-        streetName: req.body.streetName,
-        country: req.body.country,
-        state: req.body.state,
-        DP: req.body.DP
-    }
-
-    controller.userUpdate(user, (err, data) => {
-        if (err) {
-            res.json({"error": err});
-        } else {
-            res.json(data);
-        }
-    })
-})
-
-router.delete("/:id", (req, res) => {
-    const user = {
-        id: req.params.id
-    }
-
-    controller.delUser(user, (err, data) => {
-        if (err) {
-            res.json({"error": err})
-        } else {
-            res.json(data)
-        }
-    })
-})
+router.delete("/:id", auth.decodeToken, controller.delUser) //auth.logout
 
 // courses
 router.get("/courses", (req, res) => {
