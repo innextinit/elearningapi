@@ -106,17 +106,6 @@ const CourseSchema = new mongoose.Schema({
         type: String,
         default: "USD"
     },
-    tutor: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "tutor",
-        require: true,
-        validate: {
-            validator: (value) => {
-                return /^[a-f\d]{24}$/g.test(value)
-            },
-            message: problem => `${problem.value} is not a valid ObjectId`
-        }
-    },
     primaryCategory: {
         type: String,
         validate: {
@@ -156,7 +145,29 @@ const CourseSchema = new mongoose.Schema({
             },
             message: problem => `${problem.value} is not a vaild status`
         }
+    },
+    tutor: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "tutor",
+        require: true,
+        // validate: {
+        //     validator: (value) => {
+        //         return /^[a-f\d]{24}$/g.test(value)
+        //     },
+        //     message: problem => `${problem.value} is not a valid ObjectId`
+        // }
+    },
+    users: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "user",
+        // validate: {
+        //     validator: (value) => {
+        //         return /^[a-f\d]{24}$/g.test(value)
+        //     },
+        //     message: problem => `${problem.value} is not a valid ObjectId`
+        // }
     }
+    
 }, {timestamps: true})
 
 module.exports = mongoose.model("Course", CourseSchema);

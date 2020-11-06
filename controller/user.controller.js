@@ -1,7 +1,5 @@
 const User = require("../models/user.model")
 const Course = require("../models/course.model")
-const Article = require("../models/article.model")
-const Question = require("../models/question.model")
 const Delete = require("../delete/deleted.user.model")
 
 const bcrypt = require("bcryptjs")
@@ -9,10 +7,10 @@ const auth = require("../middleware/auth.middleware")
 
 // user
 exports.newUser = async (req, res, next) => {
-    let { firstName, lastName, password, email, courses } = req.body
+    let { firstName, lastName, password, email } = req.body
 
     try {
-        if (!firstName || !lastName || !email || !password || !courses) {
+        if (!firstName || !lastName || !email || !password) {
           const err = new Error()
           err.name = "Bad Request"
           err.status = 400
@@ -37,8 +35,7 @@ exports.newUser = async (req, res, next) => {
             firstName,
             lastName,
             password,
-            email,
-            courses
+            email
         })
         const user = await new User( createUser )
         user.save()
@@ -101,98 +98,128 @@ exports.login = async (req, res, next) => {
 }
 
 
-exports.userUpdate = (req, res, next) => {
-    const { firstName, lastName, otherName, password, title, gender, phone, email, zipcode, city, streetName, country, state } = req.body
-    const { id } = req.params
-    const { DP } = req.files
-
-    try {
-        if (!firstName || !lastName || !email || !password) {
-          const err = new Error()
-          err.name = ""  
+exports.userUpdate = async (req, res, next) => {
+    const user = req.user
+    let { firstName, lastName, otherName, title, gender, phone, zipcode, city, streetName, country, state } = req.body
+    const update = await User.findByIdAndUpdate(
+        user._id,
+        {
+            firstName, lastName, otherName, title, gender, phone, zipcode, city, streetName, country, state
+        },
+        {
+            upsert: true,
+            new: true
         }
+    )
+    res.json(update)
+}
+
+exports.delUser = async (req, res, next) => {
+    const user = req.user
+    console.log(user)
+    try {
+        const findUser = await User.findById(user._id)
+        if (!findUser) {
+            const err = new Error()
+            err.name = "Not Acceptable"
+            err.status = 406
+            err.message = "Could not find the User"
+            throw err
+        }
+
+        const delUser = await user.toJSON()
+        await Delete.create(delUser)
+        const del = await User.findByIdAndDelete(user._id)
+        res.json(del)
     } catch (error) {
-        
+        next(error)
     }
 }
 
-exports.delUser = (req, res, next) => {
+// application || course registration
+exports.newApplication = async (req, res, next) => {
+    const user = await req.user
+    const { appID } = await req.body
+    const foundUser = await User.findById(user._id)
+    const course = await Course.findById(appID)
+
+    const isStudentForCourse = (id) => {
+        if (course.users.indexOf(id) !== -1) {
+            return true
+        }
+    }
+
+    const amTakingCourse = (id) => {
+        if (foundUser.courses.indexOf(id) !== -1) {
+            return true
+        }
+    }
+
+    try {
+        if (!course) {
+            let err = new Error()
+            err.name = "Authentication Error"
+            err.status = 401
+            err.message = "This course doesn't exist"
+            throw err
+        }
+        if (isStudentForCourse(user._id) && amTakingCourse(course._id)) {
+            res.json(`You are already a student of this course ${course.title}`)
+        }
+        let addUserToCourse = await course.users.push(user._id)
+        console.log(addUserToCourse)
+        await course.save()
+        let addCourseToUser = await foundUser.courses.push(appID)
+        console.log(addCourseToUser)
+        await foundUser.save()
+        res.json({"mesage": `You have successfully registered for the course ${course.title}`})
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.delApplication = async (req, res, next) => {
     const user = req.user
-    User.findById(
-        user._id,
-       async (err, foundUser) => {
-            if (err) {
-                res.json({"err": err})
-            } else {
-                 const delUser = {
-                    deleteUser: foundUser.toJSON()
-                }
-               await Delete.create(delUser, (err, newDelUser) => {
-                    if (err) {
-                        return err
-                    } else {
-                        console.log(`from save to Delete forms : \n ${newDelUser}`)
-                        newDelUser.save()
-                    }
-                })
-               const del = await User.findByIdAndDelete(user._id)
-               res.json(del)
-            }
+    const { appID } = req.body
+    const foundUser = await User.findById(user._id)
+    const course = await Course.findById(appID)
+
+    const isStudentForCourse = (studentID) => {
+        if (course.users.indexOf(studentID) !== -1) {
+            return true
         }
-    )
-}
+    }
 
-// course
-exports.courses = (callback) => {
-    Course.find({}, callback)
-}
-
-// article
-exports.getCourseArticle = (article, callback) => {
-    Article.find({courseID: article.courseID},
-        callback
-    )
-}
-
-// question
-// user should not be able to get the correctAnswer
-exports.getCourseQuestion = (question, callback) => {
-    Question.find({courseID: question.courseID},
-        callback
-    )
-}
-
-// not working yet
-exports.checkAns = (question, callback) => {
-    Question.findById(
-        question.id,
-        callback
-    )
-}
-
-// application
-exports.newApplication = async (application, callback) => {
-    User.findById(application._id, (err, foundUser) => {
-        if (err) {
-            console.log(`${err} from application find user`)
-            return err
-        } else {
-            foundUser.courses.push(application.appID)
-            foundUser.save(callback)
+    const amTakingCourse = (courseID) => {
+        if (foundUser.courses.indexOf(courseID) !== -1) {
+            return true
         }
-    })
-}
+    }
 
-exports.delApplication = async (application, callback) => {
-    await User.findById(
-        application.id, (err, foundUser) => {
-            if (err) {
-                return err
-            } else {
-                foundUser.updateOne({"courses": foundUser.courses.filter((course) => { 
-                    return course != application.appID
-                })}, callback)
-            }
+    try {
+        if (!isStudentForCourse(user._id) || !amTakingCourse(course._id)) {
+            res.json(`You did not register for this course ${course.title}`)
         }
-    )
+
+        // removeUserFromCourse
+        await course.updateOne({ "users" : course.users.filter((usersList) => {
+            usersList != user._id
+            
+        })})
+
+        // removeCourseFromUser
+        await foundUser.updateOne({ "courses": foundUser.courses.filter((courseList) => {
+            courseList != course._id
+            
+        })})
+
+        const havingCourse = await isStudentForCourse(course._id)
+        if (!havingCourse) {
+            res.json({
+                "message":`You have successfully leave this course ${course.title}`
+            })
+        }
+    } catch (error) {
+        next(error)
+    }
 }

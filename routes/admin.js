@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const controller = require("../controller/index.controller")
+const controller = require("../controller/admin.controller")
 
 // courses
 router.get("/courses", (req, res) => {

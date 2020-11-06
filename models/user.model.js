@@ -60,7 +60,12 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         validate: {
             validator: (value) => {
-                return /^(\d{3})+(\d{3})+(\d{3})+(\d{4})$/.test(value)
+                if (typeof value === 'null' || 'undefined' || ' ') {
+                    let value = 2341234567890
+                    return /^(\d{3})+(\d{3})+(\d{3})+(\d{4})$/.test(value)
+                } else {
+                    return /^(\d{3})+(\d{3})+(\d{3})+(\d{4})$/.test(value)
+                }
             },
             message: problem => `${problem.value} is not valid`
         }
@@ -166,12 +171,12 @@ const UserSchema = new mongoose.Schema({
     courses: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "Courses",
-        validate: {
-            validator: (value) => {
-                return /^[a-f\d]{24}$/.test(value)
-            },
-            message: problem => `${problem.value} is not a valid ObjectId`
-        }
+        // validate: {
+        //     validator: (value) => {
+        //         return /^[a-f\d]{24}$/.test(value)
+        //     },
+        //     message: problem => `${problem.value} is not a valid ObjectId`
+        // }
     },
     password: {
         type: String,
@@ -184,6 +189,16 @@ const UserSchema = new mongoose.Schema({
                 return /^([(\w)?+(\W)?]{8,})$/g.test(value)
             },
             message: problem => `${problem.value} is not a valid password`
+        }
+    },
+    isAdmin: {
+        type: String,
+        default: false,
+        validate: {
+            validator: (value) => {
+                return /(false)/.test(value)
+            },
+            message: problem => `${problem.value} is not valid`
         }
     }
 }, {timestamps: true});
